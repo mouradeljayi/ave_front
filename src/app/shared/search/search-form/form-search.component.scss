@@ -1,0 +1,73 @@
+@import "../../../../styles/variables";
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &>div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    &>.search-icon {
+      margin-right: 0;
+      display: block;
+      width: 1.2rem;
+      cursor: pointer;
+
+    }
+  }
+  h3{
+    font-weight: bolder;
+    margin: 0;
+    margin-left: 1rem;
+  }  
+  &>.cross-icon {
+    margin-right: 0;
+    display: block;
+    width: 0.8rem;
+    cursor: pointer;
+  }
+
+}
+
+.general-section{
+  overflow-y: auto;
+  height: 88%;
+  *{
+    font-size: 1rem;
+  }
+  &>div{
+    display: flex;
+    align-items: center;
+    &>h4{
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+  }
+}
+.buttons{
+  width: 98% !important;
+  height: 7%;
+  margin: auto;
+  box-shadow: 0px -2px 6px -2px rgba(0,0,0,0.5);
+  border-radius: 1rem 1rem 0 0;
+}
+
+.min_max{
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0;
+  padding: 0.2rem;
+  font-size: 1rem;
+  &>label{
+      font-size: 1rem;
+      margin-left: 2rem;
+  }
+  &>input{
+      width: 2.5rem;
+      border: 1px solid rgba($dark, 0.55);
+      border-radius: 0.2rem;
+  }
+}

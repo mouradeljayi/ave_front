@@ -1,0 +1,52 @@
+@import "../../../../styles/variables";
+@import "bootstrap";
+
+.popup-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($dark, 0.5);
+    z-index: 20;
+    &>div{
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        max-width: 50%;
+        padding: 1rem;
+        border-radius: 1rem;
+        background-color: white;
+        &>.title{
+            * {
+                width: 100%;
+                text-align: center;
+                color: $primary;
+            }
+        }
+        &>.message{
+            padding: 0.5rem;
+        }
+        &>.actions{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        &>.cross-icon{
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 1rem;
+            transition: transform 200ms ease-in;
+            cursor: pointer;
+            &:hover{
+                transform: scale(1.2);
+            }
+        }
+    }
+}

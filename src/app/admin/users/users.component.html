@@ -1,0 +1,222 @@
+<div class="full-body">
+    <div class="w-100 h-100 d-flex flex-column p-2 admin-container overflow-y-auto">
+        <div class="header">
+            <button class="btn-back" [routerLink]="['/admin/companies']"> <img src="assets/icons/arrow-to-left.svg"
+                    alt="back button"> Back</button>
+            <div class="d-flex align-items-center title">
+                <img src="assets/icons/user-icon.svg" alt="Company Icon">
+                <p class="m-0 pt-1">Users</p>
+            </div>
+            <div class="search">
+                <input type="search" placeholder="Search" (search)="search()" (keyup)="search()" [(ngModel)]="searchText">
+            </div>
+        </div>
+        <div class="flex-grow-1 d-flex flex-column mx-auto w-100 justify-content-start">
+            <div class="flex-grow-1 table">
+                <table class="table listing-table">
+                    <thead class="table-dark sticky">
+                        <tr>
+                            <th scope="col">Company</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Last Connexion</th>
+                            <th scope="col">Enabled</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody *ngIf="users.length > 0">
+                        <tr *ngFor="let user of users_to_show">
+                            <td>
+                                <span>{{ company.name | empty}}</span>
+                            </td>
+                            <td>
+                                <span>{{ user.first_name | empty}}</span>
+                            </td>
+                            <td>
+                                <span>{{ user.last_name | empty}}</span>
+                            </td>
+                            <td>
+                                <span>{{ user.user_role['name'] | empty}}</span>
+                            </td>
+                            <td>
+                                <span>{{ user.email | empty}}</span>
+                            </td>
+                            <td>
+                                <span>{{ user.last_connexion | empty}}</span>
+                            </td>
+                            <!-- <td>
+                                <span>{{ user.users_counter | empty}} Users</span>
+                            </td>
+                            <td style="font-size: 1rem;">
+                                IF : {{ user.max_if | empty }} <br> 
+                                AF : {{ user.max_af | empty }}
+                            </td> -->
+                            <td>
+                                <img src="assets/icons/{{ user.enabled ? 'enabled' : 'disabled' }}-icon.svg"
+                                    alt="enabled icon" width="30px">
+                            </td>
+                            <td>
+                                <button (click)="showInfos(user)" class="mini-btn-gray btn-primary py-0 m-1">
+                                    Infos
+                                </button>
+                                <button class="mini-btn-gray btn-primary py-0 m-1">
+                                    Activity
+                                </button>
+                                <br>
+                                <button (click)="showActions(user)" class="mini-btn-primary btn-primary py-0 m-1">
+                                    Actions
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h1 class="w-100 text-center pt-3" *ngIf="!(users.length > 0)">Users List is Empty</h1>
+            </div>
+            <div class="w-95 mx-auto p-2">
+                <button class="btn btn-primary px-3 rounded-40" (click)="showAddUser()">
+                    <img class="p-1 pe-2" src="assets/icons/plus-icon.svg" alt="plus icon">
+                    Add a User
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<app-popup-ui (cancel)="cancel()" *ngIf="actions_popup" class="w-60">
+    <h4 title class="text-center text-primary">
+        Users Actions
+    </h4>
+    <div message style="width: 50vw;">
+
+        <div class=" w-100 d-flex flex-column btn-actions">
+            <div>
+                <h5 class="sub-title" >Password</h5>
+                <div class="d-flex">
+                    <button class="btn btn-primary btn-no-border">Reset Password</button>
+                </div>
+            </div>
+            <div>
+                <h5 class="sub-title" >Activation</h5>
+                <div class="d-flex">
+                    <button class="btn btn-primary btn-no-border">Reset Activation</button>
+                    <button class="btn btn-primary btn-no-border">Manuel Activation</button>
+                    <button class="btn btn-primary btn-no-border" (click)="showLinkToLastEngineers()" >Connect to Last Engineers</button>                    
+                </div>
+            </div>
+            <div>
+                <h5 class="sub-title" >Log in</h5>
+                <div class="d-flex">
+                    <button class="btn btn-primary btn-no-border">LogIn as Admin</button>
+                </div>
+            </div>
+            <div>
+                <h5 class="sub-title" >Delete Account</h5>
+                <div class="d-flex">
+                    <button class="btn btn-primary btn-no-border">Delete Account</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <app-spinner-html spinner *ngIf="isLoading"></app-spinner-html>
+</app-popup-ui>
+
+
+
+<app-popup-ui (cancel)="cancel()" *ngIf="users_popup" class="w-60">
+    <h4 title class="text-center text-primary">
+       {{ selected_user ? "User Info" :  "New User" }}
+    </h4>
+    <form message class="row pe-4" (ngSubmit)="onSubmitUser()" [formGroup]="addUserForm" style="width: 50vw; position: relative;">
+
+        <div class="col w-50">
+            <app-field name="ID" *ngIf="selected_user">
+                <input autocomplete="off" formControlName="ref" class="dm-text-input" type="text"
+                    name="ref" id="ref">
+            </app-field>
+            <app-field name="First Name" [required]="!selected_user">
+                <input autocomplete="off" formControlName="first_name" class="dm-text-input" type="text"
+                    name="first_name" id="first_name">
+            </app-field>
+            <app-field name="Last Name" [required]="!selected_user">
+                <input autocomplete="off" formControlName="last_name" class="dm-text-input" type="text"
+                    name="last_name" id="last_name">
+            </app-field>
+            <app-searchable-select name="Role" [list]="roles" [required]="!selected_user"
+            [selected_item]="selected_user ? selected_user.user_role : ''"
+            (select_event)="select_role($event)"></app-searchable-select>
+            <app-field name="City" [required]="!selected_user">
+                <input autocomplete="off" formControlName="city" class="dm-text-input" type="text"
+                    name="city" id="city">
+            </app-field>
+        </div>
+        
+        <div class="col w-50 ms-4">
+            <app-searchable-select name="Country" [list]="countries" [required]="!selected_user"
+            [selected_item]="selected_user ? selected_user.country : ''"
+            (select_event)="select_contry($event)"></app-searchable-select>
+            <app-field name="Email" [required]="!selected_user">
+                <input autocomplete="off" formControlName="email" class="dm-text-input" type="email"
+                    name="email" id="email">
+            </app-field>
+            <app-searchable-select name="System Size" [list]="system_sizes"  [required]="!selected_user" 
+            [selected_item]="selected_user ? selected_user.system_size_slug : ''"
+            (select_event)="select_system_size($event)"></app-searchable-select>
+            <app-field name="Password" *ngIf="!selected_user">
+                <input autocomplete="off" formControlName="password" class="dm-text-input" type="text"
+                    placeholder="Password" name="password" id="password">
+            </app-field>
+        </div>
+       
+        <div class="d-flex justify-content-center mt-5">
+            <button class="btn btn-primary px-4" [disabled]="addUserForm.invalid && !selected_user" (click)="onSubmitUser()">
+              <img src="assets/icons/check-icon.svg" alt="close icon" width="16px" class="me-2">
+              {{ selected_user ? "Save" :  "Add User" }}
+            </button>
+          </div>
+        
+
+    </form>
+    <app-spinner-html spinner *ngIf="isLoading"></app-spinner-html>
+</app-popup-ui>
+
+
+
+
+<app-popup-ui (cancel)="cancel()" *ngIf="connect_footengineers_popup" class="w-60">
+    <h4 title class="text-center text-primary">
+        Connect to Last Engineers
+    </h4>
+    <form message class="d-flex p-3 py-5" style="width: 30vw;" (ngSubmit)="linkToLastEngineers()" autocomplete="off" [formGroup]="linkToLastengineersForm">
+        <div class="w-100 p-2">
+            <app-field name="Email" [required]="true">
+                <input autocomplete="off" formControlName="email" class="dm-text-input" type="text"
+                    placeholder="Email" name="email" id="email">
+            </app-field>
+            <app-field name="Code Activation" [required]="true">
+                <input autocomplete="off" formControlName="token" class="dm-text-input" type="text"
+                    placeholder="Code Activation" name="token" id="token">
+            </app-field>
+            <app-field name="platform" [required]="true">
+                <div class="dm-radio-input-v1 w-100 ps-4">
+                    <ng-container *ngFor="let platform of [ { name : 'Local', slug : 'local' }, { name : 'Test', slug : 'test' }, { name : 'Prod', slug : 'prod' } ]">
+                        <input autocomplete="off" formControlName="platform" type="radio" [value]="platform.slug"
+                            name="platform" id="{{ 'platform_' + platform.slug }}" >
+                        <label for="{{ 'platform_' + platform.slug}}">{{ platform.name }}</label>
+                    </ng-container>
+                </div>
+            </app-field>         
+        </div>
+    </form>
+    <ng-container actions>
+        <div class="w-100 d-flex justify-content-center">
+            <button [disabled]="linkToLastengineersForm.invalid" class="btn btn-primary" (click)="linkToLastEngineers()">Connect Account</button>
+        </div>
+    </ng-container>
+    <app-spinner-html spinner *ngIf="isLoading"></app-spinner-html>
+</app-popup-ui>

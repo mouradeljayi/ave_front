@@ -1,0 +1,152 @@
+<div class="h-100 w-100 d-flex flex-column" (click)="showOptions = false; $event.stopPropagation()">
+    <div class="d-flex flex-column">
+        <div class="d-flex align-items-center justify-content-between w-100">
+            <div class="d-flex align-items-center justify-content-start">
+                <h3 class="title">Inventory</h3>
+                <button class="btn btn-primary ps-2 pe-3 recherche-btn pointer" (click)="search()">
+                    <img class="me-2" src="assets/icons/recherche-icon.svg" alt="search icon" widdiv="20px"
+                        height="20px">
+                    <span class="m-0 p-0">Recherche</span>
+                </button>
+            </div>
+            <div class="d-flex align-items-center justify-content-end table-parameter" >
+                <div class="show_elements" (click)="toggleOptions(); $event.stopPropagation();">
+                    <p class="m-0">Number of items to show : </p> <span>{{ pagination.pageSize }}</span> 
+                    <img src="assets/icons/open-section-icon.svg" alt="Open section icon" >
+                </div>
+                    <ul class="list-options" *ngIf="showOptions">
+                    <li *ngFor="let option of options" (click)="selectOption(option)"
+                        [ngClass]="pagination.pageSize == option ? 'bg-secondary': '' ">
+                        {{ option }}
+                    </li>
+                </ul>
+                <div class="excel" (click)="downloadExcel()">
+                    <p>Export Data in EXCEL</p> <img src="assets/icons/download-excel-icon.svg" alt="Download Excel">
+                </div>
+                <button class="btn-icon">
+                    <img src="assets/icons/parameter-icon.svg" alt="Table Parameter"  style="cursor: pointer;" (click)="toggleCustomTable(); $event.stopPropagation()">
+                </button>
+            </div>
+        </div>
+        <div class="w-100 d-flex align-items-center justify-content-start">
+        </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center w-100 overflow-auto" *ngIf="SearchService.isSearch">
+        <p class="m-0 px-2">Filters:</p>
+        <div class="d-flex w-100 overflow-auto p-1">
+            <span class="filter" *ngFor="let filter of filters()">
+                <p>{{ filter[1] | uppercase }}</p>
+                <img (click)="clear(filter[0])" src="assets/icons/white-cross-icon.svg" alt="Close Search">
+            </span>
+            <span class="filter all" (click)="clear('all')">
+                <p>ALL</p>
+                <img src="assets/icons/white-cross-icon.svg" alt="Close Search">
+            </span>
+        </div>
+
+    </div>
+    <div class="flex-grow-1" style="height: 0;">
+        <div class="w-100 h-100 overflow-y-auto table-container">
+            <!-- {{height}} -->
+            <table class="table listing-table">
+                <thead class="table-dark sticky">
+                    <tr>
+                        <th scope="col">
+                            <div>
+                                <div class="dm-checkbox-input-select">
+                                    <input type="checkbox" name="select_all" id="select_all" 
+                                    [checked]="all_refs.length > 0 && selected_list.length == all_refs.length"
+                                    (change)="selectAll($event)">
+                                    <label for="select_all"></label>
+                                </div>
+                            </div>
+                        </th>
+                        <th scope="col" *ngFor="let column of UserService.user.selected_columns['inventory'];">
+                            {{ column.name }}
+                        </th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+              
+                <tbody *ngIf="foots_list.length > 0">
+                    <tr *ngFor="let foot of foots_list" (click)="select(foot)"
+                        [ngClass]="{active: (selected_foot && foot.ref == selected_foot.ref)}">
+                        <td scope="row">
+                            <div>
+                                <div class="dm-checkbox-input-select">
+                                    <input type="checkbox" name="{{ foot.ref }}" id="{{ foot.ref }}"
+                                        [checked]="selected_list.includes(foot.ref)">
+                                    <label class="disabled" for="{{ foot.ref }}"></label>
+                                </div>
+                            </div>
+                        </td>
+                        <!-- <td scope="row">
+                            <div>
+                                <div class="dm-checkbox-input-select">
+                                    <input type="checkbox" name="{{ foot.ref }}" id="{{ foot.ref }}"
+                                        [checked]="foot.ref == (selected_foot && selected_foot.ref)">
+                                    <label class="disabled" for="{{ foot.ref }}"></label>
+                                </div>
+                            </div>
+                        </td> -->
+                        <td *ngFor="let column of UserService.user.selected_columns['inventory'];">
+                            <div *ngIf="column.slug">
+                                <ng-container *ngIf="column.slug === 'image'; else textContent">
+                                    <img [src]="image(foot[column.slug])" alt="foot image" width="60px" style="max-height: 30px;">
+                                </ng-container>
+                                <ng-template #textContent>
+                                  <span>  {{ foot[column.slug] | empty }}</span>
+                                </ng-template>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-delete pointer" (click)="deleteConfirm(foot.ref);$event.stopPropagation();">
+                                <img src="assets/icons/delete-icon.svg" alt="delete icon" width="100%">
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h1 class="w-100 text-center pt-3" *ngIf="!(foots_list.length > 0)">Foot List is Empty</h1>
+        </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+        <button class="btn btn-primary px-3 rounded-40" [routerLink]="['/foot-inventory/new']">
+            <img class="p-1 pe-2" src="assets/icons/plus-icon.svg" alt="plus icon">
+            Foot ID Creation
+        </button>
+        <div class="d-flex align-items-center justify-content-end">
+            <div class="pagination">
+                <img src="assets/icons/pagination-previous.svg" alt="pagination previous icon"
+                    [ngClass]="{disabled: pagination.current == 0}" (click)="paginate(pagination.current - 1)">
+
+                <ng-container *ngFor="let page of page_count">
+                    <button *ngIf="pagination_showing_list.includes(page) || more(page)" (click)="paginate(page)"
+                        [disabled]="more(page)" [ngClass]="{active: page == pagination.current, more: more(page) }">
+
+                        <b *ngIf="more(page)">...</b>
+                        <b *ngIf="!more(page)">{{ page + 1 }}</b>
+
+                    </button>
+                </ng-container>
+                <img src="assets/icons/pagination-next.svg" alt="pagination next icon"
+                    [ngClass]="{disabled: pagination.current == pagination.count - 1}"
+                    (click)="paginate(pagination.current +1)">
+            </div>
+            <p class="shown">Showing {{ first_el }} to {{ last_el }} of {{ pagination.all }} elements</p>
+        </div>
+    </div>
+</div>
+
+<app-popup-ui  (cancel)="cancel()" *ngIf="delete_popup">
+    <h4 title class="text-center text-primary">
+        Delete
+    </h4>
+    <p message>
+        Are You Sure to delete this foot ?
+    </p>
+    <ng-container actions>
+        <button class="btn btn-danger" (click)="cancel()">Cancel</button>
+        <button class="btn btn-primary" (click)="delete()">Delete</button>
+    </ng-container>
+</app-popup-ui>

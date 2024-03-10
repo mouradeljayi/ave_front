@@ -1,0 +1,130 @@
+@import "../../../styles/variables";
+
+.back{
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($color: #000000, $alpha: 0.3);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 21;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-screen-card {
+  width: 96vw;
+  height: 96vh;
+  position: relative;
+  box-shadow: 0.4rem 0.6rem 1.4rem rgba(0, 0, 0, 0.1);
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.title {
+  position: absolute;
+  color: $primary;
+  left: 40%;
+  top: 2rem;
+}
+
+.lr-group {
+  position: absolute;
+  margin: 6rem;
+}
+
+.close-icon {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  cursor: pointer;
+}
+
+.metrics-table {
+  display: flex;
+  position: absolute;
+  top: 5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 0.7rem;
+  width: 40%;
+  right: 4rem;
+
+  &>h4 {
+    background-color: $dark;
+    color: white;
+    font-size: 1rem;
+    padding: 0.4rem 0 0.1rem 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  &>div {
+    table {
+      &>tbody>tr:nth-child(2n) {
+        background-color: rgba($dark , 0.04);
+      }
+
+      &>tbody>tr>td {
+        position: relative;
+        vertical-align: middle;
+        line-height: 1.3rem;
+
+        &:first-child {
+          border-right: 1px solid $dark;
+        }
+
+        &>span {
+          display: inline-block;
+          padding: 0.1rem;
+          font-size: 0.8rem;
+          text-transform: capitalize;
+
+          &.group-name {
+            padding-left: 0.1rem;
+
+            &>b {
+              font-size: 0.9rem;
+            }
+          }
+
+          &:last-child {
+            text-align: end;
+            padding-right: 1rem;
+            font-weight: 700;
+          }
+
+          &:first-child {
+            text-align: center;
+
+            &>img {
+              max-width: 1.25rem;
+              margin: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.all-metrics-icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  width: 15%;
+}
+
+.hide-icon {
+  position: absolute;
+  right: 1.5rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  cursor: pointer;
+}

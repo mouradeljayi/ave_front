@@ -1,0 +1,98 @@
+<div class="add-foot" @toggleFootInventory *ngIf="animation_boolean">
+    <div class="d-flex align-items-center">
+        <div class="d-flex justify-content-start align-items-center  flex-grow-1">
+            <h5 class="mt-2 me-4 fw-bolder">Inventory</h5>
+            <form class="search-box" (ngSubmit)="onSubmit()" [formGroup]="search_form">
+                <input type="text" class="search-input" placeholder="Search" formControlName="reference"
+                    (keyup.enter)="onSubmit()">
+                <div class="search-icon">
+                    <img src="assets/icons/search-icon.svg" alt="search icon">
+                </div>
+                <div class="clear-icon" (click)="clearSearch()" *ngIf="searchService.isSearch">
+                    <img src="assets/icons/cross-icon.svg" alt="close icon" width="12px">
+                </div>
+            </form>
+        </div>
+        <div class="me-5">
+            <div class="custom-button-group">
+                <button class="custom-button px-4" [class.active-button]="foot_type === 'individual'" type="button"
+                    (click)="fetchData()">Individual</button>
+                <button class="custom-button px-4" [class.active-button]="foot_type === 'average'" type="button"
+                    (click)="fetchData('average')">Average</button>
+            </div>
+        </div>
+        <img src="assets/icons/cross-icon.svg" alt="close icon" class="ms-5" style="cursor: pointer;" (click)="close()">
+    </div>
+    <!--Table-->
+
+    
+    
+    <div class="flex-grow-1 mt-4" style="height: 57rem;">
+        <div class="w-100 h-100 overflow-y-auto table-container">
+            <!-- {{height}} -->
+            <table class="table listing-table">
+                <thead class="table-dark sticky">
+                    <tr>
+                        <th>Preview</th>
+                        <th>Foot ID</th>
+                        <th>Reference</th>
+                        <th>Sexe</th>
+                        <th>Category</th>
+                        <th>Size</th>
+                        <th>L/R</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="foots_list.length > 0">
+                    <tr *ngFor="let foot of foots_list" (click)="selectFoot(foot)"
+                    [ngClass]="{active: (selected_foot && foot.ref == selected_foot.ref)}">
+
+                    <td> <img [src]="image(foot.image)" alt="last icon" width="60px" style="max-height: 30px;"></td>
+                    <td> <span class="text-white"
+                        [ngClass]="{ 'bg-dark': foot_type === 'individual', 'bg-success': foot_type === 'average'}">
+                        {{ foot.foot_id | empty | uppercase}}</span>
+                    </td>
+                    <td> <span>{{foot.reference | empty}}</span></td>
+                    <td> <span>{{ foot.gender_name| empty}}</span></td>
+                    <td> <span>{{foot.category_name | empty}} </span></td>
+                    <td> <span>{{foot[foot.default_direction].size | empty }}</span></td>
+                    <td> <span>{{ foot.left_right |empty }}</span></td>
+                    <td>
+                        <div class="d-flex justify-content-around align-items-center">
+                            <img src="assets/icons/info-icon.svg" alt="icon info"
+                                (click)="openFootInfo(foot);$event.stopPropagation();">
+                            <span class="text-bg-primary ms-2">
+                                <img src="assets/icons/check-icon.svg" alt="check icon">
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+                <app-spinner></app-spinner>
+            </table>
+            <h1 class="w-100 text-center pt-3" *ngIf="!(foots_list.length > 0)">Foot List is Empty</h1>
+        </div>
+    </div>
+
+
+    <div class="d-flex align-items-center justify-content-end">
+        <div class="pagination">
+            <img src="assets/icons/pagination-previous.svg" alt="pagination previous icon"
+                [ngClass]="{disabled: pagination.current == 0}" (click)="paginate(pagination.current - 1)">
+
+            <ng-container *ngFor="let page of page_count">
+                <button *ngIf="pagination_showing_list.includes(page) || more(page)" (click)="paginate(page)"
+                    [disabled]="more(page)" [ngClass]="{active: page == pagination.current, more: more(page) }">
+
+                    <b *ngIf="more(page)">...</b>
+                    <b *ngIf="!more(page)">{{ page + 1 }}</b>
+
+                </button>
+            </ng-container>
+            <img src="assets/icons/pagination-next.svg" alt="pagination next icon"
+                [ngClass]="{disabled: pagination.current == pagination.count - 1}"
+                (click)="paginate(pagination.current +1)">
+        </div>
+        <span class="shown">Showing {{ first_el }} to {{ last_el }} of {{ pagination.all }} elements</span>
+    </div>
+</div>

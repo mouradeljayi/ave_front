@@ -1,0 +1,14 @@
+<div class="messages" *ngIf="show">
+    <div class="{{type}}" @opening *ngIf="animation_boolean">
+        <div class="header text-center d-flex align-items-center justify-content-center">
+            <h5 class="m-0">{{ messageType() }}</h5>
+            <img (click)="hide()" class="cross-icon" src="assets/icons/cross-icon.svg" alt="close popup icon">
+        </div>
+        <div class="body">
+            {{ message }}
+        </div>
+        <div class="footer d-flex justify-content-center align-items-start">
+            <button class="btn btn-outline-primary py-1 px-2" type="button" (click)="hide()">Ok</button>
+        </div>
+    </div>
+</div>

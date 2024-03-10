@@ -1,0 +1,11 @@
+<div class="grid-container" (click)="closeCustomTable()">
+    <div class="navbar">
+        <app-navigation></app-navigation>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+<app-messages></app-messages>
+<app-search *ngIf="search"></app-search>
+<app-table-custom [isAverage]="isAverage" *ngIf="custom_table"></app-table-custom>
+
+

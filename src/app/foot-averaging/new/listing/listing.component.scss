@@ -1,0 +1,220 @@
+@import "../../../../styles/variables";
+
+.title {
+    font-weight: 900;
+    margin-bottom: 0;
+    margin-right: 2rem;
+}
+.pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    &>* {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4rem;
+        background-color: $secondary;
+        padding: 0.3rem 0 0.1rem 0;
+        margin: 0.5rem;
+        width: 2rem;
+        height: 2rem;
+        color: rgba($dark , 0.75);
+        font-weight: 700;
+        line-height: 10px;
+        cursor: default;
+        border: 0;
+        outline: none;       
+        &:focus{
+            border: 0;
+            outline: none;
+        }
+        &.more{
+            &>b{
+                cursor: default;
+                padding-bottom: 0.5rem;
+            }
+        }
+        &.disabled{
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+        &.active{
+            background-color: $primary;
+            color: white;
+        }
+
+        &:hover {
+            background-color: rgba($primary, 0.5);
+            transform: scale(1.1);
+        }
+    }
+
+    &>img {
+        padding: 0.5rem;
+    }
+}
+
+.shown {
+    font-weight: 700;
+    color: rgba($dark , 0.75);
+    margin: 0 1rem;
+    font-size: 1rem;
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+.table-container {
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    .listing-table {
+        &> :not(caption)>*>* {
+            padding: 0.5rem 0.5rem;
+            background-color: unset;
+            border-bottom-width: 0;
+        }
+
+        thead tr {
+            &>th {
+                font-size: 0.8rem;
+                font-weight: 500;
+                background-color: $dark;
+                position: relative;
+                text-align: center;
+            }
+        }
+
+        tbody>tr {            
+            &:nth-child(2n+1) {
+                background-color: rgba($dark , 0.03);
+            }
+
+            &:hover {
+                background-color: rgba($dark , 0.05);
+            }
+            &.active{
+                background-color: rgba($primary, 0.15);
+            }
+
+            td {
+                position: relative;
+                vertical-align: middle;
+                text-align: center;
+
+                * {
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                    &.ref{
+                        text-transform: uppercase;
+                        font-size: 0.7rem;
+                        padding-top: 0.3rem;
+                      }
+                }
+
+                span {
+                    display: block;
+                    background-color: rgba($dark , 0.75);
+                    color: white;
+                    padding: 0.15rem 0.5rem 0 0.5rem;
+                    border-radius: 1rem;
+                    width: fit-content;
+                    min-width: 4rem;
+                    text-align: center;
+                    margin: auto;
+                }
+
+                &:nth-child(2n) {
+                    span {
+                        background-color: darken($secondary , 0.5);
+                        color: $dark;
+
+                    }
+                }
+
+                &:nth-child(2n+1) {
+                    span {
+                        background-color: rgba($dark , 0.65);
+                        color: white;
+                    }
+                }
+
+                &:nth-child(3) {
+                    span {
+                        background-color: lighten($dark , 0.25);
+                        color: white;
+
+                    }
+                }
+
+                .btn-delete {
+                    width: 30px;
+                    height: 30px;
+                    padding: 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 2rem;
+                    background-color: rgba($dark , 0.15);
+                    border: 0;
+                    transition: transform 300ms ease-in;
+                    margin: auto;
+
+                    &:hover {
+                        border: 0;
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+    }
+}
+.table-parameter{
+    &>.btn-icon{
+        padding: 0.1rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        margin: 0 0.5rem;
+        &>img{
+            width: 60%;
+        }
+    }
+    &>.excel{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba($primary, 0.2);
+        color: $primary;
+        border-radius: 1rem;
+        padding: 0.05rem 1rem;
+        margin: 0 0.5rem;
+        &>p{
+            font-size: 0.9rem;
+            margin: 0.2rem 0 0 0;
+        }
+        &>img{
+            margin-left: 0.5rem;
+            width: 0.9rem;
+        }
+    }
+}
+
+.btn-success{
+    &:hover, &:focus{
+        background-color: $success;
+        border-color: $success;
+        box-shadow: 0px 4px 6px -2px rgba($success, 0.5);
+    }
+}
+.table{
+    margin-bottom: 0;
+}
+.stroke {
+    stroke: rgba($dark , 0.8);
+}
+

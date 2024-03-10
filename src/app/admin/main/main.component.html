@@ -1,0 +1,50 @@
+<div class="full-body">
+    <div class="w-100 h-100 d-flex flex-column p-2 admin-container overflow-y-auto">
+        <h1 class="title">System <br> Administration 
+        <button class="btn-back" [routerLink]="['/home']"> <img src="assets/icons/arrow-to-left.svg" alt="back button"> Back</button>
+        </h1>
+        <div class="d-flex flex-column mx-auto w-90 justify-content-start">
+            <h3 class="w-100 text-left border-bottom">Gestion</h3>
+
+            <div class="w-50 d-flex align-items-center justify-content-around pt-5 mx-auto flex-grow-1">
+                <button [routerLink]="['/admin/companies']" class="btn-home pointer px-4">
+                    <img src="assets/icons/company-icon.svg" alt="Company Icon">
+                    Companies
+                </button>
+                <a href="mailto: support@footengineers.com" class="btn-home pointer px-4">
+                    <img src="assets/icons/message-icon.svg" alt="Scanner Icon">
+                    Support
+                </a>
+            </div>
+
+            <section class="d-flex flex-column align-items-center w-100 mt-3 activities">
+                <h3 class="w-100 text-left border-bottom">
+                    Last 24 hours
+                </h3>
+                <div class="w-100 d-flex flex-wrap justify-content-around">
+                    <p class="w-30">Individual Foot : 39 202</p>
+                    <p class="w-30">Foot-Last Evaluation : 203</p>
+                    <p class="w-30">Last Connexion : {{ UserService.user.last_connexion }}</p>
+                    <p class="w-30">Foot Average: 74</p>
+                    <p class="w-30">Foot-Last Optimisation : 126</p>
+                    <p class="w-30">Foot-Last Modification : 183</p>
+                </div>
+            </section>
+
+            <section class="d-flex flex-column align-items-center w-100 mt-3 activities">
+            <h3 class="w-100 text-left border-bottom">
+                Last 7 days
+            </h3>
+            <div class="w-100 d-flex flex-wrap justify-content-around">
+                <p class="w-30">Individual Foot : 39 202</p>
+                <p class="w-30">Foot-Last Evaluation : 203</p>
+                <p class="w-30">Last Connexion : {{ UserService.user.last_connexion }}</p>
+                <p class="w-30">Foot Average: 74</p>
+                <p class="w-30">Foot-Last Optimisation : 126</p>
+                <p class="w-30">Foot-Last Modification : 183</p>
+            </div>
+        </section>
+
+        </div>
+    </div>
+</div>

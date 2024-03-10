@@ -1,0 +1,148 @@
+<div class="h-60 w-100 d-flex flex-column h-100">
+    <div class="d-flex flex-column">
+        <div class="d-flex align-items-center justify-content-between w-100 p-1">
+            <div class="d-flex align-items-center justify-content-start">
+                <h3 class="title">
+                    <svg class="me-2" width="36" height="38" viewBox="0 0 18 19" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 0.5H0V18.5H18V0.5Z" fill="white" fill-opacity="0.01"></path>
+                            <path d="M1.5 2V17H16.5" stroke-width="1.2" stroke-linecap="round"
+                                stroke-linejoin="round" class="stroke"></path>
+                            <path d="M3.75 14.75C3.75 14.75 5.74219 2 10.125 2C14.5078 2 16.5 14.75 16.5 14.75"
+                                stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="stroke"></path>
+                            <path d="M3 9.5H18" stroke-width="1.2" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-dasharray="2 6" class="stroke"></path>
+                    </svg>
+                    Average Foot {{ title }}</h3>
+            </div>
+            <div class="d-flex align-items-center justify-content-end table-parameter">
+                <div class="dm-badge-success mx-3">
+                    <p>Foot ID</p>
+                    <p>#AUTO_GEN</p>
+                </div>
+                <button class="btn btn-success px-3 rounded-40" [disabled]="(avgId ? selected_foot_list.length : selected_list.length) === 0" (click)="createFootAverage()">
+                    <img class="p-1 pe-2" src="assets/icons/plus-icon.svg" alt="plus icon">
+                    {{ !avgId ? 'Create' : 'Update' }} Foot Average
+                </button>
+                
+            </div>
+        </div>
+        <div class="w-100 d-flex align-items-center justify-content-start">
+        </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center w-100 overflow-auto" *ngIf="SearchService.isSearch">
+        <p class="m-0 px-2">Filters:</p>
+        <div class="d-flex w-100 overflow-auto p-1">
+            <span class="filter" *ngFor="let filter of filters()">
+                <p>{{ filter[1] | uppercase }}</p>
+                <img (click)="clear(filter[0])" src="assets/icons/white-cross-icon.svg" alt="Close Search">
+            </span>    
+            <span class="filter all" (click)="clear('all')">
+                <p>ALL</p>
+                <img src="assets/icons/white-cross-icon.svg" alt="Close Search">
+            </span>
+        </div>
+
+    </div>
+    <div class="flex-grow-1" style="height: 0;">
+        <div class="w-100 h-100 overflow-y-auto table-container">
+            <table class="table listing-table">
+                <thead class="table-dark sticky">
+                    <tr>
+                        <th scope="col">
+                            <div>
+                                <div class="dm-checkbox-input-select">
+                                    <input type="checkbox" name="select_all" id="select_all" 
+                                    [checked]="all_refs.length > 0 && selected_list.length == all_refs.length"
+                                    (change)="selectAll($event)">
+                                    <label for="select_all"></label>
+                                </div>
+                            </div>
+                        </th>
+                        <th scope="col">Preview</th>
+                        <th scope="col">Foot ID</th>
+                        <th scope="col">Reference</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">L/R</th>
+                        <!-- <th scope="col">Action</th> -->
+                    </tr>
+                </thead>
+                <tbody *ngIf="foots_list.length > 0">
+                    <tr *ngFor="let foot of foots_list" (click)="select(foot)">
+                        <td scope="row">
+                            <div>
+                                <div class="dm-checkbox-input-select" *ngIf="!avgId">
+                                    <input type="checkbox" name="{{ foot.ref }}" id="{{ foot.ref }}"
+                                        [checked]="selected_list.includes(foot.ref)">
+                                    <label class="disabled" for="{{ foot.ref }}"></label>
+                                </div>
+                                <div class="dm-checkbox-input-select" *ngIf="avgId">
+                                    <input type="checkbox" name="{{ foot.ref }}" id="{{ foot.ref }}"
+                                        [checked]="selected_foot_list.includes(foot.ref)">
+                                    <label class="disabled" for="{{ foot.ref }}"></label>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <img [src]="image(foot.image)" alt="foot image" width="60px" style="max-height: 30px;">
+                            </div>
+                        </td>
+                        <td>
+                            <span class="ref">{{ foot.foot_id | empty}}</span>
+                        </td>
+                        <td>
+                            <span>{{ foot.reference | empty}}</span>
+                        </td>
+                        <td>
+                            <span>{{ foot.gender_name | empty}}</span>
+                        </td>
+                        <td>
+                            <span>{{ foot.category_name | empty}}</span>
+                        </td>
+                        <td>
+                            <span>{{ foot[foot.default_direction].size | empty }}</span>
+                        </td>
+                        <td>
+                            <span>{{ foot.left_right | empty }} </span>
+                        </td>
+                        <!-- <td>
+                            <button class="btn btn-delete pointer" (click)="delete(foot.ref);$event.stopPropagation();">
+                                <img src="assets/icons/delete-icon.svg" alt="delete icon" width="100%">
+                            </button>
+                        </td> -->
+                    </tr>
+                </tbody>
+            </table>
+            <h1 class="w-100 text-center pt-3" *ngIf="!(foots_list.length > 0)">Foot List is Empty</h1>
+        </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-end">
+        <!-- <button class="btn btn-primary px-3 rounded-40" [routerLink]="['/foot-inventory/new']">
+            <img class="p-1 pe-2" src="assets/icons/plus-icon.svg" alt="plus icon">
+            Foot ID Creation
+        </button> -->
+        <div class="d-flex align-items-center justify-content-end">
+            <div class="pagination">
+                <img src="assets/icons/pagination-previous.svg" alt="pagination previous icon"
+                    [ngClass]="{disabled: pagination.current == 0}" (click)="paginate(pagination.current - 1)">
+
+                <ng-container *ngFor="let page of page_count">
+                    <button *ngIf="pagination_showing_list.includes(page) || more(page)" (click)="paginate(page)"
+                        [disabled]="more(page)" [ngClass]="{active: page == pagination.current, more: more(page) }">
+
+                        <b *ngIf="more(page)">...</b>
+                        <b *ngIf="!more(page)">{{ page + 1 }}</b>
+
+                    </button>
+                </ng-container>
+                <img src="assets/icons/pagination-next.svg" alt="pagination next icon"
+                    [ngClass]="{disabled: pagination.current == pagination.count - 1}"
+                    (click)="paginate(pagination.current +1)">
+            </div>
+            <p class="shown">Showing {{ first_el }} to {{ last_el }} of {{ pagination.all }} elements</p>
+        </div>
+    </div>
+</div>

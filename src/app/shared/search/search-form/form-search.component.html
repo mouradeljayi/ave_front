@@ -1,0 +1,199 @@
+    <form (click)="$event.stopPropagation()" class="search-slider d-flex flex-column h-100"  (ngSubmit)="onSubmit()" [formGroup]="search_form">
+        <div class="title h-5 p-3">
+            <div>
+                <img src="assets/icons/dark-recherche-icon.svg" class="search-icon" alt="Search Icon">
+                <h3>Search Tool</h3>
+            </div>
+            <img *ngIf="closable" (click)="closeSearch()" src="assets/icons/cross-icon.svg" alt="close user menu" class="cross-icon">
+        </div>
+        <div class="w-100 d-flex flex-column p-3 general-section" *ngIf="!isVisible">
+            <div class="d-flex align-items-cente" (click)="toggleContent(1); $event.stopPropagation();" style="cursor: pointer;" >
+                <img src="assets/icons/open-section-icon.svg" alt="Open Section Icon" 
+                [@rotateIcon]="isContent ? 'rotated' : 'normal'">
+                <h4>General</h4>
+            </div>
+            <section [@toggleContent]="isContent ? 'hidden' : 'visible'">
+                <app-field name="Foot ID" width="w-100">
+                    <input formControlName="foot_id" autocomplete="off" class="dm-text-input" type="text"
+                        placeholder="#IF" name="foot_id" id="footid">
+                </app-field>
+                <app-field name="reference" width="w-100">
+                    <input formControlName="reference" autocomplete="off" class="dm-text-input" type="text"
+                        placeholder="Reference" name="reference" id="reference">
+                </app-field>
+                <app-searchable-select name="Country" [list]="countries"  
+                 [selected_item]="selected_country ? selected_country : ''"
+                 [selected_list]="selected_countries" [isMultiple]="true"
+                 (select_event)="select_contry($event)">
+                </app-searchable-select>
+    
+                <app-searchable-select name="Scanner" [list]="scanners" [selected_list]="selected_scanners" [isMultiple]="true"
+                    (select_event)="select_scanner($event)"></app-searchable-select>
+                
+                <div class="d-flex align-items-center justify-content-between my-2 p-1">
+                    <p class="m-0 w-30">Gender</p>
+                    <div class="w-70 dm-radio-input-v3">
+                        <input value="male" formControlName="gender" name="gender" type="radio" id="gender_male">
+                        <label for="gender_male">male</label>
+        
+                        <input value="female" formControlName="gender" name="gender" type="radio" id="gender_female">
+                        <label for="gender_female">female</label>
+        
+                        <input value="unknown" formControlName="gender" name="gender" type="radio" id="gender_unknown">
+                        <label for="gender_unknown">unknown</label>
+                    </div>
+                </div>
+    
+                <div class="d-flex align-items-center justify-content-between my-2 p-1">
+                    <p class="m-0 w-30">Category</p>
+                    <div class="w-70 dm-radio-input-v3">
+                        <input value="adult" formControlName="category" name="category"  type="radio" id="category_adult">
+                        <label for="category_adult">adult</label>
+        
+                        <input value="kid" formControlName="category" name="category" type="radio" id="category_kid">
+                        <label for="category_kid">kid</label>
+        
+                        <input value="unknown" formControlName="category" name="category" type="radio" id="category_unknown">
+                        <label for="category_unknown">unknown</label>
+                    </div>
+                </div>
+    
+    
+                
+                <div class="d-flex align-items-start justify-content-between flex-wrap my-2 p-1">
+                    
+                    <p class="m-0 w-30">Size</p>
+    
+                    <div class="w-70 dm-radio-input-v4 justify-content-end">
+                        <input formControlName="system_size" value="eu_size" name="system_size" type="radio" id="size_eu" checked="checked">
+                        <label class="p-1 px-2" for="size_eu">EU</label>
+                        
+                        <input formControlName="system_size" value="uk_size" name="system_size" type="radio" id="size_uk">
+                        <label class="p-1 px-2" for="size_uk">UK</label>
+    
+                        <input formControlName="system_size" value="us_size" name="system_size" type="radio" id="size_us">
+                        <label class="p-1 px-2" for="size_us">US</label>
+                    </div>
+    
+                    <div class="w-100 min_max">
+                        <label class="p-1 px-2" for="min_size">Minimum</label>
+                        <input formControlName="min_size" name="min_size" min="0" max="400" type="number" id="min_size">
+    
+                        <label class="p-1 px-2" for="max_size">Maximum</label>
+                        <input formControlName="max_size" name="max_size" min="0" max="400" type="number" id="max_size">
+                    </div>
+    
+                </div>
+    
+                <div class="d-flex align-items-start justify-content-between flex-wrap my-2 p-1">
+                    
+                    <p class="m-0 w-30">Height</p>
+    
+                    <div class="w-70 dm-radio-input-v4 justify-content-end">
+                        <input value="cm" name="height" type="radio" id="height_cm" checked="checked">
+                        <label class="p-1 px-2" for="height_cm">cm</label>
+                    </div>
+    
+                    <div class="w-100 min_max">
+                        <label class="p-1 px-2" for="min_height">Minimum</label>
+                        <input formControlName="min_height"  name="min_height" min="0" max="300" type="number" id="min_height">
+    
+                        <label class="p-1 px-2" for="max_height">Maximum</label>
+                        <input formControlName="max_height" name="max_height" min="0" max="300" type="number" id="max_height">
+                    </div>
+    
+                </div>
+    
+                <div class="d-flex align-items-start justify-content-between flex-wrap my-2 p-1">
+                    
+                    <p class="m-0 w-30">Weight</p>
+    
+                    <div class="w-70 dm-radio-input-v4 justify-content-end">
+                        <input value="kg" name="weight" type="radio" id="weight_kg" checked="checked">
+                        <label class="p-1 px-2" for="weight_kg">kg</label>
+                    </div>
+    
+                    <div class="w-100 min_max">
+                        <label class="p-1 px-2" for="min_weight">Minimum</label>
+                        <input formControlName="min_weight" name="min_weight" min="0" max="400" type="number" id="min_weight">
+    
+                        <label class="p-1 px-2" for="max_weight">Maximum</label>
+                        <input formControlName="max_weight" name="max_weight" min="0" max="400" type="number" id="max_weight">
+                    </div>
+    
+                </div>
+    
+                <div class="d-flex align-items-start justify-content-between flex-wrap my-2 p-1">
+                    
+                    <p class="m-0 w-30">Age</p>
+    
+                    <!-- <div class="w-70 dm-radio-input-v4 justify-content-end">
+                        <input value="kg" name="weight" type="radio" id="weight_kg">
+                        <label class="p-1 px-2" for="weight_kg">kg</label>
+                    </div> -->
+    
+                    <div class="w-100 min_max">
+                        <label class="p-1 px-2" for="min_age">Minimum</label>
+                        <input formControlName="min_age"  name="min_age" min="0" max="150" type="number" id="min_age">
+    
+                        <label class="p-1 px-2" for="max_age">Maximum</label>
+                        <input formControlName="max_age" name="max_age" min="0" max="150" type="number" id="max_age">
+                    </div>
+    
+                </div>
+    
+    
+    
+                <div class="d-flex align-items-start justify-content-between my-2 p-1">
+                    <p class="m-0 w-30">Foot Type</p>
+                    <div class="w-70 dm-radio-input-v1 justify-content-end">
+                        <input formControlName="foot_type" value="greek" name="foot_type" type="radio" id="foottype_greek">
+                        <label class="w-40 justify-content-end p-1 px-2" for="foottype_greek">greek</label>
+        
+                        <input formControlName="foot_type" value="egyptian" name="foot_type" type="radio" id="foottype_egyptian">
+                        <label class="w-40 justify-content-end p-1 px-2" for="foottype_egyptian">egyptian</label>
+        
+                        <input formControlName="foot_type" value="roman" name="foot_type" type="radio" id="foottype_roman">
+                        <label class="w-40 justify-content-end p-1 px-2" for="foottype_roman">roman</label>
+            
+                        <input formControlName="foot_type" value="german" name="foot_type" type="radio" id="foottype_german">
+                        <label class="w-40 justify-content-end p-1 px-2" for="foottype_german">german</label>
+    
+                        <input formControlName="foot_type" value="celtic" name="foot_type" type="radio" id="foottype_celtic">
+                        <label class="w-40 justify-content-end p-1 px-2" for="foottype_celtic">celtic</label>
+                    </div>
+                </div>
+    
+                <div class="d-flex align-items-center justify-content-between my-2 p-1">
+                    <p class="m-0 w-30">Arch Type</p>
+                    <div class="w-70 dm-radio-input-v3">
+                        <input formControlName="arch_type" value="flat" name="arch_type" type="radio" id="archtype_flat">
+                        <label for="archtype_flat">flat</label>
+        
+                        <input formControlName="arch_type" value="normal" name="arch_type" type="radio" id="archtype_normal">
+                        <label for="archtype_normal">normal</label>
+        
+                        <input formControlName="arch_type" value="high" name="arch_type" type="radio" id="archtype_high">
+                        <label for="archtype_high">high</label>
+                    </div>
+                </div>
+    
+                <div class="d-flex align-items-center justify-content-between my-2 p-1">
+                    <p class="m-0 w-30">L / R</p>
+                    <div class="w-70 dm-radio-input-v3">
+                        <input formControlName="direction" value="right" name="direction" type="radio" id="direction_right">
+                        <label for="direction_right">Right</label>
+        
+                        <input formControlName="direction" value="left" name="direction" type="radio" id="direction_left">
+                        <label for="direction_left">Left</label>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="w-100 d-flex justify-content-around align-items-center pt-4 pb-2 buttons">
+            <button class="btn btn-primary px-5 w-40" (click)="clearSearch()" type="button" *ngIf="!closable">Clear</button>
+            <button class="btn btn-primary px-5 w-40" (click)="closeSearch()" type="button" *ngIf="closable">Cancel</button>
+            <button class="btn btn-primary px-5 w-40" type="submit">Search</button>
+        </div>
+        <app-spinner-html *ngIf="isVisible"></app-spinner-html>
+    </form>

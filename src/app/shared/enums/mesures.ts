@@ -1,0 +1,26 @@
+export const mesures = [
+  { slug: "footType", name: "Foot Type"},
+  { slug: "footLength",name: "Foot Length"},
+  { slug: "size",name: "Size"},
+  { slug: "navicularPerimeter",name: "Navicular Perimeter"},
+  { slug: "entryPerimeter",name: "Entry Perimeter"},
+  { slug: "jointPerimeter",name: "Joint Perimeter"},
+  { slug: "toePerimeter",name: "Toe Perimeter"},
+  { slug: "heelWidth",name: "Heel Width"},
+  { slug: "heelWidthD",name: "Heel Width DL"},
+  { slug: "jointWidth",name: "Join Width"},
+  { slug: "jointWidthD",name: "Join Width DL"},
+  { slug: "instep1Height",name: "Instep 1 Height"},
+  { slug: "instep2Height",name: "Instep 2 Height"},
+  { slug: "metaHeight",name: "Meta Height"},
+  { slug: "archHeight",name: "Arch Height"},
+  { slug: "heelHeight",name: "Heel Height"},
+
+  { slug: "metaExtPoint",name: "Meta Ext Point"},
+  { slug: "metaIntPoint",name: "Meta Int Point"},
+  { slug: "heelExtPoint",name: "Heel Ext Point"},
+  { slug: "heelIntPoint",name: "Heel Int Point"},
+  { slug: "morphoGroundPoint",name: "Morpho Ground Point"},
+  { slug: "toeHeight", name: "Toe Height"},
+  { slug: "halluxValgusAngle", name: "Hallux Valgus Angle"}
+];

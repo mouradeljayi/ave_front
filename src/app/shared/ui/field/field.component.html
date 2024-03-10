@@ -1,0 +1,17 @@
+
+<div class="{{width}} field-container">
+    <div>
+        <p class="name" [ngClass]="{capitalize: capitalize}">{{name}}</p>
+        <div>
+            <span class="help" attr.data-help="{{ help }}" *ngIf="help != ''">?</span>
+            <span class="required" attr.data-help="{{'Required Field'}}" *ngIf="required">*</span>
+        </div>
+
+    </div>
+    <div >
+        <ng-content></ng-content>
+    </div>
+</div>
+<div *ngIf="unit_width != ''" class="{{unit_width}} px-3">
+    <ng-content select="[unit]"></ng-content>
+</div>

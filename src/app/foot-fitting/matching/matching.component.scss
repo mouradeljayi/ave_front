@@ -1,0 +1,25 @@
+@import '../../../styles/variables';
+
+.listing-heading {
+    padding: 1.286rem 0 0.286rem 1.429rem;
+    /* top right bottom left */
+    font-weight: bold;
+}
+
+.cut-border-bottom {
+    position: relative;
+}
+
+.cut-border-bottom::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 6%;
+    right: 6%;
+    height: 0.071rem;
+    top: 1.071rem;
+    background-color: rgba(94, 94, 94, 0.2);
+
+}
+
+

@@ -1,0 +1,41 @@
+<div class="login-form">
+    <div class="form-container position-relative overflow-hidden" @loginState>
+        <h2 class="title">Log In</h2>
+        <form (ngSubmit)="onLogin()" autocomplete="off" [formGroup]="loginForm">
+            <app-field [capitalize]="false" name="Email" width="w-100">
+                <input
+                class="dm-text-input"
+                type="text"
+                placeholder="Email"
+                formControlName="footengineers_email"
+                id="footengineers_email"
+                autocomplete="one-time-code">
+            </app-field>
+
+            <app-field name="Password" width="w-100">
+                <input 
+                class="dm-text-input"
+                type="password"
+                placeholder="Password"
+                autocomplete="one-time-code"
+                formControlName="footengineers_password"
+                id="footengineers_password">
+            </app-field>
+
+            <div class="d-flex flex-column align-items-center justify-content-center mt-3 mb-2">
+                <re-captcha 
+                siteKey="{{siteKey}}" 
+                formControlName="recaptcha">
+                </re-captcha>
+            </div>
+
+            <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary px-3">Log In</button>
+
+            <div class="d-flex flex-column align-items-center justify-content-center actions">
+                <p>Forget your Password : <a [routerLink]="['/retrieve-my-password']">retrieve my password</a></p>
+                <p>I don't have an account : <a href="mailto: support@footengineers.com">contact us</a></p>
+            </div>
+        </form>
+        <app-spinner></app-spinner>
+    </div>
+</div>

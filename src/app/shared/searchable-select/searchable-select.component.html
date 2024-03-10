@@ -1,0 +1,55 @@
+<!-- <div class="app-searchable-select d-flex flex-column align-items-end w-100 rounded-5 position-relative">
+    <div class="w-100 d-flex justify-content-between position-relative px-2">
+        <img (click)="toggle()" class="icon" [ngClass]="{'open': visible}" src="assets/icons/select-arrow.svg"
+            alt="open close icon">
+        <div class="label">
+            <p class="name">{{name}}</p>
+            <div>
+                <span class="help" attr.data-help="{{ help }}" *ngIf="help">?</span>
+                <span class="required" attr.data-help="{{'Required Field'}}" *ngIf="required">*</span>
+            </div>
+        </div>
+        <input (click)="open()" placeholder="Select" (keyup)="onKey($event)" [(ngModel)]="selected_item.text"
+            class="w-70" type="text" name="seach_text" id="name">
+    </div>
+    <div class="float-end px-2 position-relative list-container">
+        <ul *ngIf="visible">
+            <li class="mx-1 px-1 position-relative" *ngFor="let item of showing_list" (click)="select(item)">
+                {{ item.text }}
+                <img class="selected_icon" *ngIf="selected_item.text == item.text" src="assets/icons/green-accept.svg"
+                    alt="selected item">
+            </li>
+        </ul>
+    </div>
+</div> -->
+
+<div class="app-searchable-select">
+
+    <div class="label">
+        <p class="name">{{name}}</p>
+        <span class="help" attr.data-help="{{ help }}" *ngIf="help">?</span>
+        <span class="required" attr.data-help="{{'Required Field'}}" *ngIf="required">*</span>
+    </div>
+    <div class="input" (click)="open()">
+        <input [placeholder]="placeholder ? placeholder : 'Select ' + name" (keyup)="onKey($event)" [(ngModel)]="selected_item[display_name]"
+            class="w-70" type="text" name="{{slug}}_seach_text" id="{{name}}" autocomplete="off" [disabled]="!visible">
+        <div class="list-container" *ngIf="visible" (click)="$event.stopPropagation();">
+            <ul>
+                <li class="mx-1 px-1 position-relative" *ngFor="let item of showing_list" (click)="select(item);$event.stopPropagation();">
+                    {{ item[display_name] }}
+                    <img class="selected_icon" *ngIf="isActive(item)"
+                        src="assets/icons/green-accept.svg" alt="selected item">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <img (click)="toggle()" class="icon" [ngClass]="{'open': visible}" src="assets/icons/select-arrow.svg"
+        alt="open close icon">
+    </div>
+    <div *ngIf="isMultiple && selected_list.length > 0">
+        <ul class="w-100 overflow-x d-flex selected-filter">
+            <li *ngFor="let item of selected_list">
+                {{ item[display_name] }}
+            </li>
+        </ul>
+    </div>

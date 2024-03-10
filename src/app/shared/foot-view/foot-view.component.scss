@@ -1,0 +1,175 @@
+@import "../../../styles/variables";
+
+.title {
+    margin: 0;
+    display: flex;
+    align-items: center;
+
+    &>h3 {
+        margin: 0;
+        padding-top: 0.5rem;
+        padding-left: 0.5rem;
+        font-weight: 700;
+    }
+
+    &>img {
+        height: 25px;
+    }
+}
+
+.infos-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 0.7rem;
+
+    &>h4 {
+        background-color: $dark;
+        color: white;
+        font-size: 1rem;
+        padding: 0.4rem 0 0.1rem 0;
+        margin: 0;
+        width: 100%;
+        text-align: center;
+        border-radius: 0.5rem 0.5rem 0 0;
+
+        b {
+            font-weight: 100;
+        }
+    }
+
+    &>div {
+        table {
+            &>tbody>tr:nth-child(2n) {
+                background-color: rgba($dark , 0.04);
+            }
+
+            &>tbody>tr>td {
+                position: relative;
+                vertical-align: middle;
+                line-height: 1.3rem;
+
+                &:first-child {
+                    border-right: 1px solid $dark;
+                }
+
+                &>span {
+                    display: inline-block;
+                    padding: 0.1rem 0.1rem 0.1rem 1.5rem;
+                    font-size: 0.8rem;
+                    font-weight: 700;
+                }
+
+                &:first-child[colspan] {
+                    border-right: 0;
+                }
+            }
+        }
+    }
+}
+
+.scene-container {
+    border: 1px solid rgba($secondary, 0.8);
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-top: 0.5rem;
+    position: relative;
+
+    &>.actions {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+    }
+
+    &>.full-screen-icon {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        width: 25px;
+        cursor: pointer;
+    }
+}
+
+.metrics-table {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 0.7rem;
+    flex-grow: 1;
+    height: 0;
+
+    &>h4 {
+        background-color: $dark;
+        color: white;
+        font-size: 1rem;
+        padding: 0.4rem 0 0.1rem 0;
+        margin: 0;
+        width: 100%;
+        text-align: center;
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    &>div {
+        table {
+            &>tbody>tr:nth-child(2n) {
+                background-color: rgba($dark , 0.04);
+            }
+
+            &>tbody>tr>td {
+                position: relative;
+                vertical-align: middle;
+                line-height: 1.3rem;
+
+                &:first-child {
+                    border-right: 1px solid $dark;
+                }
+
+                &>span {
+                    display: inline-block;
+                    padding: 0.1rem;
+                    font-size: 0.8rem;
+                    text-transform: capitalize;
+
+                    &.group-name {
+                        padding-left: 0.1rem;
+
+                        &>b {
+                            font-size: 0.9rem;
+                        }
+                    }
+
+                    &:last-child {
+                        text-align: end;
+                        padding-right: 1rem;
+                        font-weight: 700;
+                    }
+
+                    &:first-child {
+                        text-align: center;
+
+                        &>img {
+                            max-width: 1.25rem;
+                            margin: auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.test {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.all-metrics-icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    width: 15%;
+}

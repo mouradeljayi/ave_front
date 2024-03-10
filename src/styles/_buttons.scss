@@ -1,0 +1,73 @@
+.btn{
+    @include inline-flex-center;
+    margin: 0.25rem;
+}
+.mini-btn{
+    @extend .btn;
+    padding-top: 0.2rem !important;
+    border-radius: 2rem;
+    padding: 0.25rem 0.9rem;
+    background-color: $white;
+    color: $primary;
+    min-width: 4rem;
+    &.active{
+        background-color: $primary;
+        color: $white;
+    }
+}
+.mini-btn-gray{
+    @extend .btn;
+    padding-top: 0.2rem !important;
+    border-color: darken($secondary , 0.5);
+    border-radius: 2rem;
+    background-color: darken($secondary , 0.5);
+    color: $dark;
+    min-width: 4rem;
+    &:hover{
+        border-color: darken($secondary , 0.5);
+        color: darken($secondary , 0.5);
+        background-color: $dark;
+    }
+}
+.mini-btn-primary{
+    @extend .btn;
+    padding-top: 0.2rem !important;
+    border-color: darken($primary , 0.5);
+    border-radius: 2rem;
+    background-color: darken($primary , 0.5);
+    color: $white;
+    min-width: 4rem;
+    &:hover{
+        border-color: darken($secondary , 0.5);
+        color: darken($secondary , 0.5);
+        background-color: $dark;
+    }
+}
+// .btn:hover, .mini-btn:hover {
+//     background-color: lighten($primary, 3%);
+//     border-color: lighten($primary, 5%);
+// }
+
+.btn-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 3rem;
+    padding: 8px;
+    margin: 0.3rem;
+    outline: 0;
+    border: 0;
+    background-color: $primary;
+    cursor: default !important;
+    transition: transform 100ms ease-in;
+    &:focus {
+        outline: none;
+        border: 0;
+    }
+    &:hover {
+        background-color: lighten($primary, 3%);
+        transform: scale(1.1);
+    }
+}

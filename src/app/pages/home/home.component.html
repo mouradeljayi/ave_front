@@ -1,0 +1,176 @@
+<div class="full-body" style="overflow: hidden;">
+
+    <div class="home-container">
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="h-100 position-relative">
+                    <img class="h-100" src="assets/images/login/login-sidebar.png" alt="login image">
+                    <img class="white-logo" src="assets/logo/footengineers_logo-white.svg"
+                        alt="foot engineers white logo">
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="d-flex justify-content-around align-items-center">
+                    <div class="home-page-title">
+                        <img src="assets/icons/home-icon.svg" width="30px" alt="Home Icon">
+                        <h5 class="ms-3 mt-2 fw-bold">Homepage</h5>
+                    </div>
+
+                    <button *ngIf="UserService.user.user_role.name == 'Admin'" [routerLink]="['/admin']"
+                        class="btn-home btn-admin pointer">
+                        <img src="assets/icons/admin-icon.svg" alt="Admin Icon">
+                        ADMIN
+                    </button>
+                </div>
+                <section class="d-flex flex-column align-items-center w-50">
+                    <h3 class="w-100 text-left border-bottom">
+                        My Account
+                    </h3>
+                    <div class="w-100 d-flex align-items-center justify-content-around pt-3">
+                        <button [routerLink]="['/scanners']" class="btn-home pointer px-4">
+                            <img src="assets/icons/hand-scanner-icon.svg" alt="Scanner Icon">
+                            Scanners
+                        </button>
+                        <a href="mailto: support@footengineers.com" class="btn-home pointer px-4">
+                            <img src="assets/icons/message-icon.svg" alt="Scanner Icon">
+                            Support
+                        </a>
+                        <button (click)="UserService.logout()" class="btn-home btn-logout pointer px-4">
+                            <img src="assets/icons/out-icon-white.svg" alt="Scanner Icon">
+                            Log Out
+                        </button>
+                    </div>
+                </section>
+
+                <section class="d-flex flex-column align-items-center w-50 mt-5 activities">
+                    <h3 class="w-100 text-left border-bottom">
+                        Activity
+                    </h3>
+                    <div class="row w-100 py-4">
+                        <div class="col text-center">
+                            <p>Individual Foot: {{stats.inventory}}</p>
+                            <p>Average Foot: {{stats.average }}</p>
+                        </div>
+                        <div class="col text-center">
+                            <p>Foot-Last Evaluation : 203</p>
+                            <p>Foot-Last Optimisation : 126</p>
+                            <p>Foot-Last Modification : 183</p>
+                        </div>
+                        <div class="col text-center">
+                            <p>Last Connexion : {{ UserService.user.last_connexion }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="d-flex flex-column align-items-center w-50 mt-3">
+                    <h3 class="w-100 text-left border-bottom">
+                        Modules
+                    </h3>
+                    <div class="row pt-3">
+                        <div class="col-6 d-flex justify-content-center">
+                            <button [routerLink]="['/foot-inventory']" class="btn-module pointer ">
+                                <img src="assets/icons/database-icon.svg" width="20px" alt="Inventory icon"> Inventory
+                            </button>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center">
+                            <button [routerLink]="['/foot-averaging']" class="btn-module pointer ">
+                                <img src="assets/icons/foot-averaging-icon.svg" width="20px" alt="Foor Averaging icon"> Foot Averaging
+                            </button>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center">
+                            <button [routerLink]="['/data-analytics']" class="btn-module pointer ">
+                                <img src="assets/icons/data-analytics-icon.svg" width="20px" alt="Data Analytics icon"> Data Anlytics
+                            </button>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center">
+                            <button [routerLink]="['/foot-fitting']" class="btn-module pointer">
+                                <img src="assets/icons/fitting-icon.svg" width="30px" alt="Inventory icon"> Fitting
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <img src="assets/images/home/green-last-image.png" alt="Green Last Image" class="last-image">
+
+
+    <!-- <div class="w-100 h-100 d-flex flex-column p-2 home-container overflow-y-auto">
+        
+        <div class="w-100 d-flex justify-content-between px-4 py-2">
+            
+            <div class="d-flex align-items-start">
+                <img src="assets/icons/home-icon.svg" width="30px" alt="Home Icon">
+                <h5 class=" title m-0 ms-3 mt-1">Homepage</h5>
+            </div>
+            <button *ngIf="UserService.user.user_role == 'Admin'" [routerLink]="['/admin']" class="btn-home btn-admin pointer">
+                <img src="assets/icons/admin-icon.svg" alt="Admin Icon">
+                ADMIN
+            </button>
+        </div>
+        <section class="d-flex flex-column align-items-center mx-auto w-50 mt-3">
+            <h3 class="w-100 text-left border-bottom">
+                My Account
+            </h3>
+            <div class="w-100 d-flex align-items-center justify-content-around pt-3">
+                <button [routerLink]="['/scanners']" class="btn-home pointer px-4">
+                    <img src="assets/icons/hand-scanner-icon.svg" alt="Scanner Icon">
+                    Scanners
+                </button>
+                <a href="mailto: support@footengineers.com" class="btn-home pointer px-4">
+                    <img src="assets/icons/message-icon.svg" alt="Scanner Icon">
+                    Support
+                </a>
+                <button (click)="UserService.logout()" class="btn-home pointer px-4">
+                    <img src="assets/icons/out-icon.svg" alt="Scanner Icon">
+                    Log Out
+                </button>
+            </div>
+        </section>
+        <section class="d-flex flex-column align-items-center mx-auto w-50 mt-3 activities">
+            <h3 class="w-100 text-left border-bottom">
+                Activity
+            </h3>
+            <div class="w-100 d-flex flex-wrap justify-content-around">
+                <p class="w-30">Individual Foot : 39 202</p>
+                <p class="w-30">Foot-Last Evaluation : 203</p>
+                <p class="w-30">Last Connexion : {{ UserService.user.last_connexion }}</p>
+                <p class="w-30">Foot Average: 74</p>
+                <p class="w-30">Foot-Last Optimisation : 126</p>
+                <p class="w-30">Foot-Last Modification : 183</p>
+            </div>
+        </section>
+        <section class="d-flex flex-column align-items-center mx-auto w-50 mt-3">
+            <h3 class="w-100 text-left border-bottom">
+                Modules
+            </h3>
+            <div class="row pt-3">
+                <div class="col-6 d-flex justify-content-center">
+                    <button [routerLink]="['/foot-inventory']" class="btn-module pointer px-4">
+                        Inventory
+                    </button>
+                </div>
+                <div class="col-6 d-flex justify-content-center">
+                    <button [routerLink]="['/foot-averaging']" class="btn-module pointer px-4">
+                        Foot Averaging
+                    </button>
+                </div>
+                <div class="col-6 d-flex justify-content-center">
+                    <button [routerLink]="['/data-analytics']" class="btn-module pointer px-4">
+                        Data Anlytics
+                    </button>
+                </div>
+                <div class="col-6 d-flex justify-content-center">
+                    <button [routerLink]="['/foot-fitting']" class="btn-module pointer px-4">
+                        Foot-Last
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </div> -->
+
+  
+</div>

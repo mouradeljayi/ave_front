@@ -1,0 +1,15 @@
+<div class="login-container">
+    <div class="h-100 position-relative">
+        <img class="h-100" src="assets/images/login/login-sidebar.png" alt="login image">
+        <img class="white-logo" src="assets/logo/footengineers_logo-white.svg" alt="foot engineers white logo">
+    </div>
+    <div class="h-100 flex-grow-1 p-5 main-section" [ngClass]="{'animate': animate}">
+        <h1>Welcome to Foot Engineers</h1>
+        <img class="image-1" src="assets/images/login/lasts-1.png" alt="lasts 1 image">
+        <img class="image-2" src="assets/images/login/lasts-2.png" alt="lasts 2 image">
+        <img class="image-3" src="assets/images/login/lasts-3.png" alt="lasts 3 image">
+        <p class="copyright">copyright 2023 - Blue Ridge Logiciels</p>
+    </div>
+</div>
+<app-login-form *ngIf="showlogin"></app-login-form>
+<app-messages></app-messages>

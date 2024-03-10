@@ -1,0 +1,36 @@
+<div class="scene-card position-relative">
+
+  <button class="btn btn-primary rounded-40 button-ps" style="margin: 3rem" (click)="openToolbox()" *ngIf="localService.selected_foot_id">
+    <span style="font-size:1rem" class="mt-1">Open Toolbox</span>
+    <img class="custom-arrow-image" src="assets/icons/chevron-right-icon.svg" alt="chevron right icon">
+  </button> 
+
+ 
+  
+  <ng-container *ngIf="localService.selected_foot_id; else otherContent">
+    <app-spinner-html *ngIf="show_spinner"></app-spinner-html>
+    <app-main-scene [zoom]="zoom"></app-main-scene>
+  </ng-container>
+  
+  <ng-template #otherContent>
+    <div class="empty-scene">
+      <p>Please select a Last / Foot Matching</p>
+    </div>
+  </ng-template> 
+  
+  
+  
+<div class="main-card">
+  <div class="bordered-div d-flex justify-content-between card-list" *ngIf="localService.selected_foot_id">
+    <img src="assets/icons/scene-image1.svg" alt="scene image" class="clickable-image">
+    <img src="assets/icons/scene-image2.svg" alt="scene image" class="clickable-image">
+    <img src="assets/icons/scene-image3.svg" alt="scene image" class="clickable-image">
+    <img src="assets/icons/scene-image4.svg" alt="scene image" class="clickable-image">
+    <div class="relative-border"></div>
+    <img src="assets/icons/scene-image5.svg" alt="scene image" class="clickable-image" (click)="rotate('S')">
+    <img src="assets/icons/scene-image6.svg" alt="scene image" class="clickable-image" (click)="rotate('T')">
+  </div>
+</div>
+</div>
+
+

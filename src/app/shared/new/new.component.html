@@ -1,0 +1,138 @@
+<div class="full-body">
+<form (ngSubmit)="onCreateNew()" [formGroup]="add_new_form"
+    class="app-new-container w-100 h-100 position-relative pt-4">
+    <app-spinner></app-spinner>
+    <h1>{{ title }} Foot ID</h1>
+    <section class="h-100 w-50 container section1">
+        <div class="w-80 mx-auto">
+
+            <div class="dm-badge">
+                <p>Foot ID</p>
+                <p>#AUTO_GEN</p>
+            </div>
+
+            <div class="d-flex informations">
+                <h2>
+                    Informations <span>?</span>
+                    
+                </h2>
+                <h5 *ngIf="title === 'Create'">Date D'ajout : {{ dateNow | date: 'dd/MM/yyyy'}}</h5>
+                <h5 *ngIf="title === 'Update'">Date D'ajout : {{ dateNow }}</h5>
+            </div>
+
+            <!-- <app-field name="reference" help="Reference Help" [required]="true"> -->
+            <app-field name="reference">
+                <input autocomplete="off" formControlName="reference" class="dm-text-input" type="text"
+                    placeholder="Reference" name="reference" id="reference">
+            </app-field>
+
+            <app-field name="gender">
+                <div class="dm-radio-input-v1 w-100 ps-4">
+                    <ng-container *ngFor="let gender of ENUMS.GENDER_LIST">
+                        <input autocomplete="off" formControlName="gender_name" type="radio" [value]="gender.slug"
+                            name="gender_name" id="{{ 'gender_' + gender.slug}}" >
+                        <label for="{{ 'gender_' + gender.slug}}">{{gender.name}}</label>
+                    </ng-container>
+                </div>
+            </app-field>
+
+            <app-field name="category">
+                <div class="dm-radio-input-v1 w-100 ps-4">
+
+                    <ng-container *ngFor="let category of ENUMS.CATEGORY_LIST">
+                        <input autocomplete="off" formControlName="category_name" type="radio" [value]="category.slug"
+                            name="category_name" id="{{ 'category_' +  category.slug}}">
+                        <label for="{{ 'category_' +  category.slug}}">{{category.name}}</label>
+                    </ng-container>
+                </div>
+            </app-field>
+
+
+            <app-field unit_width="w-25" width="w-50" name="weight">
+                <input autocomplete="off" formControlName="weight_value" class="dm-text-input" type="number" step="0.5"
+                    placeholder="Weight" name="weight_value" id="weight_value">
+                <div unit class="dm-radio-input-v1">
+                    <input type="radio" id="kg" checked="checked">
+                    <label style="min-width: 2.5rem;text-transform: lowercase;" for="kg">kg</label>
+                </div>
+            </app-field>
+
+            <app-field unit_width="w-25" width="w-50" name="height">
+                <input autocomplete="off" formControlName="height_value" class="dm-text-input" type="number" step="0.5"
+                    placeholder="Height" name="height_value" id="height_value">
+                <div unit class="dm-radio-input-v1">
+                    <input type="radio" id="cm" checked="checked">
+                    <label style="min-width: 2.5rem;text-transform: lowercase;" for="cm">cm</label>
+                </div>
+            </app-field>
+
+            <app-field width="w-50" name="age">
+                <input autocomplete="off" formControlName="age" class="dm-text-input" type="number" step="1"
+                    placeholder="Age" name="age" id="age">
+            </app-field>
+
+            <app-searchable-select [placeholder]="selected_country ? selected_country : 'Select Country'" name="Country" [list]="countries"
+                (select_event)="select_contry($event)"></app-searchable-select>
+
+            <app-searchable-select [placeholder]="selected_scanner ? selected_scanner : 'Select Scanner'" name="Scanner" [list]="scanners" slug="ref"
+                (select_event)="select_scanner($event)"></app-searchable-select>
+
+            <div class="note">
+                <p>Client note</p>
+                <textarea formControlName="note" placeholder="note"></textarea>
+            </div>
+        </div>
+
+    </section>
+    <section class="h-100 w-50 container section2">
+        <div class="h-45 w-80 mx-auto position-relative pt-4 custom-fields">
+            <div class="d-flex informations">
+                <h2>
+                    Custom Fields <span>?</span>
+                </h2>
+                <button class="btn btn-primary px-3" type="button">
+                    <img class="p-1 pe-3" src="assets/icons/plus-icon.svg" alt="plus icon">
+                    Add Field</button>
+            </div>
+        </div>
+        <div class="h-45 w-100 model-3d p-3">
+            <div class="w-80 h-15 d-flex informations">
+                <span class="design"></span>
+                <h2>
+                    Upload 3D STL Model <span>?</span>
+                </h2>
+            </div>
+            <div class="h-85 w-100 d-flex foots-container">
+                <div class="single-foot">
+                    <div class="scene w-100 h-90 pb-1 pointer position-relative">
+                        <app-main-scene></app-main-scene>
+                        <div class="icon-div" *ngIf="!left_foot_scene" (click)="uploadLeft()">
+                            <img class="w-30"  src="assets/icons/upload-icon.svg" alt="upload icon">
+                        </div>
+                    </div>
+                    <span class="mini-btn btn-primary py-0">Left</span>
+                    <!-- <span class="mini-btn btn-primary py-0" *ngIf="left_foot_scene">Change</span> -->
+                    <input autocomplete="off" (change)="footChange($event, 'left')" style="display: none;" #leftfoot
+                        name="stl" accept=".stl" type="file">
+                </div>
+                <div class="single-foot">
+                    <div class="scene w-100 h-90 pb-1 pointer position-relative">
+                        <app-second-scene></app-second-scene>
+                        <div class="icon-div" *ngIf="!right_foot_scene" (click)="uploadRight()">
+                            <img class="w-30"  src="assets/icons/upload-icon.svg" alt="upload icon">
+                        </div>
+                    </div>
+                    <span class="mini-btn btn-primary py-0">Right</span>
+                    <!-- <span class="mini-btn btn-primary py-0" *ngIf="right_foot_scene">Change</span> -->
+                    <input autocomplete="off" (change)="footChange($event, 'right')" style="display: none;" #rightfoot
+                        name="stl" accept=".stl" type="file">
+                </div>
+            </div>
+        </div>
+        <div class="h-10 w-100 d-flex justify-content-end align-items-center">
+            <button class="btn btn-outline-primary px-5" type="button" [routerLink]="['/foot-inventory']" >Cancel</button>
+            <button class="btn btn-primary px-5" type="submit" [disabled]="add_new_form.invalid">{{  title }}</button>
+        </div>
+    </section>
+</form>
+</div>

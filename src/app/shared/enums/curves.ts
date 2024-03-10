@@ -1,0 +1,23 @@
+export const curves = {
+  navicularPerimeter: { type: "Curve", show: false, captureView:'top', color:'#000000' },
+  jointPerimeter: { type: "Curve", show: false, captureView:'top', color:'#000000' },
+  toePerimeter: { type: "Curve", show: false, captureView:'top', color:'#000000' },
+  entryPerimeter: { type: "Curve", show: false, captureView:'top', color:'#000000' },
+  heelWidth: { type: "Line", show: false, captureView:'top', color:'#000000' },
+  heelWidthD: { type: "Line", show: false, captureView:'top', color:'#ff0000' },
+  instep1Height: { type: "Line", show: false, captureView:'side', color:'#000000' },
+  instep2Height: { type: "Line", show: false, captureView:'side', color:'#000000' },
+  metaHeight: { type: "Line", show: false, captureView:'side', color:'#000000' },
+  archHeight: { type: "Line", show: false, captureView:'side', color:'#000000' },
+  heelHeight: { type: "Line", show: false, captureView:'top', color:'#000000' },
+  jointWidth: { type: "Line", show: false, captureView:'top', color:'#000000' },
+  jointWidthD: { type: "Line", show: false, captureView:'top', color:'#00ff00' },
+  toeHeight: { type: "Line", show: false, captureView:'top', color:'#000000' },
+  metaExtPoint: { type: "Point", show: false, captureView:'top', color:'#000000' },
+  metaIntPoint: { type: "Point", show: false, captureView:'top', color:'#000000' },
+  heelExtPoint: { type: "Point", show: false, captureView:'top', color:'#000000' },
+  heelIntPoint: { type: "Point", show: false, captureView:'top', color:'#000000' },
+  morphoGroundPoint: { type: "Point", show: false, captureView:'top', color:'#000000' },
+  footType: { type: "Point", show: false, captureView:'top', color:'#000000' },
+  halluxValgusAngle: { type: "Angle", show: false, captureView:'top', color:'#000000' }
+};

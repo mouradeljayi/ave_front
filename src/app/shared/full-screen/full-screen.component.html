@@ -1,0 +1,53 @@
+<div class="back">
+    <div class="full-screen-card">
+            <h1 class="title">Full Screen View</h1>
+            <img src="assets/icons/cross-icon.svg" alt="close icon" class="close-icon" (click)="close()">
+            <div class="flex justify-content-start lr-group">
+                <button class="btn btn-outline-primary rounded-40 px-5 btn-md" [ngClass]="{active: direction == 'left'}"
+                    (click)="selectFootDirection('left')">Left</button>
+                <button class="btn btn-outline-primary rounded-40 px-5 btn-md" [ngClass]="{active: direction == 'right'}"
+                    (click)="selectFootDirection('right')">Right</button>
+            </div>
+            <div class="px-2 pb-2 metrics-table" *ngIf="isProcessed()" (click)="toggleContent();$event.stopPropagation();">
+                <h4 class="w-100" >
+        
+                    <div class="all-metrics-icon">
+                        <img width="16px"
+                            src="assets/icons/{{ showAll ? 'eye-icon-white.svg': 'close-eye-icon-white.svg' }}"
+                            alt="eye icon" (click)="toggleAll(); $event.stopPropagation();">
+                        <span style=" font-size:1rem;">All</span>
+                    </div>
+                    Metrics
+                    <img 
+                        src="assets/icons/down-white-icon.svg" alt="down-white-icon" class="hide-icon"
+                        [@rotateIcon]="isMetrics ? 'rotated' : 'normal'">
+                </h4>
+                <div class="w-100 flex-grow-1" [@toggleContent]="isMetrics ? 'hidden' : 'visible'">
+                    <table class="w-100">
+                        <tbody class="w-100">
+                            <ng-container *ngFor="let mesure of mesures; let i = index">
+                                <tr class="w-100 test" *ngIf=" i % 2 == 0 ">
+                                    <td class="w-50">
+                                        <span class="w-15"><img *ngIf="mesure.mesure" (click)="toggle(mesure.slug);$event.stopPropagation();"
+                                                src="assets/icons/{{ mesure.show ? '':'close-' }}eye-icon.svg"
+                                                alt="eye icon"></span>
+                                        <span class="w-55">{{ mesure.name }}</span>
+                                        <span class="w-30">{{ mesure.data }}</span>
+                                    </td>
+                                    <td class="w-50" *ngIf="mesures[i+1]">
+                                        <span class="w-15"><img *ngIf="mesures[i+1].mesure" (click)="toggle(mesures[i+1].slug); $event.stopPropagation();"
+                                                src="assets/icons/{{ mesures[i+1].show ? '':'close-' }}eye-icon.svg"
+                                                alt="eye icon"></span>
+                                        <span class="w-55">{{ mesures[i+1].name }}</span>
+                                        <span class="w-30">{{ mesures[i+1].data }}</span>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <app-spinner-html *ngIf="show_spinner" class="spinner"></app-spinner-html>
+            <app-main-scene [zoom]="3"></app-main-scene>
+    </div>
+</div>

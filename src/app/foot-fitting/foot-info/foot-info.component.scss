@@ -1,0 +1,18 @@
+@import '../../../styles/variables';
+
+.info-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 35.714rem;
+    height: 100%;
+    display: block;
+    background-color: white;
+  }
+
+  .cross-icon {
+    position: relative;
+    bottom: 0.50rem;
+    right: 0.90rem;
+    left: 0.22rem;
+  }

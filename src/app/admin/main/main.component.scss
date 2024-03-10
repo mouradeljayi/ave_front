@@ -1,0 +1,76 @@
+@import "../../../styles/variables";
+.admin-container{
+    h1.title{
+        width: 100%;
+        text-align: center;
+        text-transform: uppercase;
+        padding: 1rem;
+        position: relative;
+        &>.btn-back{
+            position: absolute;
+            background-color: $dark;
+            color: white;
+            border-radius: 2rem;
+            border: 0;
+            outline: 0;
+            padding: 0.2rem 0.5rem;
+            font-size: 1.2rem;
+            left: 0.5rem;
+            top: 1rem;
+            img{
+                padding-right: 0.3rem;
+            }
+        }
+    }
+
+    .btn-home{
+        border: 0;
+        padding: 0.75rem 1rem;
+        border-radius: 0.25rem;
+        box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.5);
+        background-color: rgba($dark, $alpha: 0.05);
+        color: $dark;
+        font-size: 1.5rem;
+        &>img{
+            margin-right: 1rem;
+        }
+        &:hover{
+            background-color: $primary;
+            // color: white;
+        }
+        &.btn-admin{
+            &:hover{
+                background-color: $danger;
+            }
+        }
+    }
+
+    // .btn-module{
+    //     border: 0;
+    //     padding: 1rem 1rem;
+    //     border-radius: 0.5rem;
+    //     background-color: $dark;
+    //     font-size: 1.5rem;
+    //     color: white;
+    //     width: 65%;
+    //     margin: 1rem;
+    //     transition: box-shadow 150ms ease-in;
+    //     &:hover{
+    //         box-shadow: 0px 6px 6px -2px rgba(0, 0, 0, 0.5);
+    //     }
+    // }
+
+    .activities{
+        p{
+            font-size: 1rem;
+        }
+    }
+
+    h5.title{
+        font-weight: 700;
+    }
+    .border-bottom{
+        border-bottom: 1px solid $dark;
+    }
+
+}

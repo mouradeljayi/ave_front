@@ -1,0 +1,56 @@
+<div class="listing-card">
+
+    <app-matching></app-matching>
+
+    <h4 class="listing-heading mt-2">
+        <img src="assets/icons/modification-icon.svg" alt="edit icon" width="20px">
+        Modification Report
+    </h4>
+
+    <div *ngIf="localService.selected_foot_id">
+        <div class="me-4 ms-4 shadow-sm border">
+            <div class="d-flex justify-content-between pe-5 ps-5 bg-dark text-white">
+                <span style="font-size: 1rem;">Metrics</span>
+                <span style="font-size: 1rem;">Initial</span>
+                <span style="font-size: 1rem;">Modified</span>
+                <span style="font-size: 1rem;">Input</span>
+            </div>
+            <div class="w-100 px-2 pb-2 metrics-table" style="overflow-y: auto">
+    
+                <div class="w-100 flex-grow-1">
+                    <table class="w-100">
+                        <tbody class="w-100">
+                            <ng-container *ngFor="let mesure of mesures; let i = index">
+                                <tr class="w-100 test">
+                                    <td class="w-30">
+                                        <span class="w-10"><img *ngIf="mesure.mesure" (click)="toggle(mesure.slug)"
+                                                src="assets/icons/{{ mesure.show ? '':'close-' }}eye-icon.svg"
+                                                alt="eye icon">
+                                        </span>
+                                        <span>{{ mesure.name }}</span>
+    
+                                    </td>
+                                    <td class="w-30">
+                                        <span>{{ mesure.data }}</span>
+                                    </td>
+                                    <td class="w-30">
+                                        <span>{{ mesure.data }}</span>
+                                    </td>
+                                    <td class="w-10">
+                                        <input type="text" id="" class="custom-input">
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+        <div class="d-flex justify-content-center mt-1">
+            <button class="btn btn-primary rounded-40 shadow-sm px-4">
+                <img src="assets/icons/edit-icon.svg" alt="edit icon" class="pe-2">Update
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="custom-container" @tableState >
+    <div class="d-flex justify-content-between align-items-center p-4 ps-5">
+        <div class="d-flex justify-content-start align-items-center">
+            <img src="assets/icons/custom-table-icon.svg" alt="icon info">
+            <h4 class="title">Customize Inventory</h4>
+        </div>
+
+        <img src="assets/icons/cross-icon.svg" alt="close icon" class="ms-5" class="cross-icon" (click)="close()">
+    </div>
+    
+    <div class="row" *ngIf="isAverage">      
+
+        <div class="col mt-5 ms-4">
+            <div class="mb-4" *ngFor="let column of columns.average.slice(0,12)">
+                <label class="switch">
+                    <input type="checkbox" [(ngModel)]="column.status" (change)="validateSelection()">
+                    <span class="slider round"></span>
+                </label>
+                <span class="ms-4">{{ column.name }}</span>
+            </div>
+        </div>
+
+        <div class="col mt-5 me-4">
+            <div class="mb-4" *ngFor="let column of columns.average.slice(12)">
+                <label class="switch">
+                    <input type="checkbox" [(ngModel)]="column.status" (change)="validateSelection()">
+                    <span class="slider round"></span>
+                </label>
+                <span class="ms-4">{{ column.name }}</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" *ngIf="!isAverage">      
+
+        <div class="col mt-5 ms-4">
+            <div class="mb-4" *ngFor="let column of columns.inventory.slice(0,12)">
+                <label class="switch">
+                    <input type="checkbox" [(ngModel)]="column.status" (change)="validateSelection()">
+                    <span class="slider round"></span>
+                </label>
+                <span class="ms-4">{{ column.name }}</span>
+            </div>
+        </div>
+
+        <div class="col mt-5 me-4">
+            <div class="mb-4" *ngFor="let column of columns.inventory.slice(12)">
+                <label class="switch">
+                    <input type="checkbox" [(ngModel)]="column.status" (change)="validateSelection()">
+                    <span class="slider round"></span>
+                </label>
+                <span class="ms-4">{{ column.name }}</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="cut-border-bottom"></div>
+
+    <div class="d-flex  justify-content-center align-items-center mt-5">
+        <button class="btn btn-primary px-5 p-2" type="button" (click)="sendSelectedColumns()" 
+        [disabled]="selected_columns.average.length > 7 || selected_columns.inventory.length > 7">Save</button>
+        <button class="btn btn-outline-primary px-5 p-2 ms-3" type="button" (click)="close()">Close</button>
+    </div>
+
+
+</div>

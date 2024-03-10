@@ -1,0 +1,16 @@
+<div (dragend)="dropEnd($event)" (dragover)="dropOver($event)" class="body" [style.grid-template-columns]="width != null ? width +'% 1% ' + (99 - +width) +'%' : '64% 1% 35%'">
+    <div class="main position-relative">
+        <app-inventory-listing></app-inventory-listing>
+        <app-spinner></app-spinner>
+    </div>
+    <div 
+    draggable="true"
+     class="dragable"></div>
+    <div class="sidebar position-relative">
+        <app-foot-view *ngIf="selected_foot != null" [selected_foot]="selected_foot"></app-foot-view>
+        <div *ngIf="selected_foot == null" class="w-100 h-100 d-flex align-items-center justify-content-center">
+            <h2>Select Foot</h2>
+        </div>
+        <app-spinner-html *ngIf="report_spinner"></app-spinner-html>
+    </div>
+</div>

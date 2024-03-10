@@ -1,0 +1,180 @@
+<div class="d-flex flex-column h-100" *ngIf="selected_foot">
+    <div class="d-flex align-items-center justify-content-between w-100 px-4">
+        <div class="title">
+            <img src="assets/icons/report-icon.svg" alt="report icon">
+            <h3>Foot View</h3>
+        </div>
+        <div class="d-flex align-items-center" *ngIf="isProcessed()">
+            <button class="btn-icon">
+                <img src="assets/icons/edit-icon.svg" alt="edit icon" (click)="editFoot()">
+            </button>
+            <button class="btn-icon" (click)="downloadPDF()">
+                <img src="assets/icons/download-pdf-icon.svg" alt="download pdf icon">
+            </button>
+            <button class="btn-icon" (click)="download()">
+                <img src="assets/icons/download-stl-icon.svg" alt="download stl icon">
+            </button>
+        </div>
+    </div>
+    <div class="w-100 px-2 infos-table" *ngIf="!isAverage">
+        <h4><span>Foot ID </span> <b class="uppercase">{{ selected_foot.foot_id }}</b></h4>
+        <div class="w-100">
+            <table class="w-100">
+                <tbody class="w-100">
+                    <tr class="w-100">
+                        <td class="w-50">
+                            <span class="w-50">Reference</span>
+                            <span class="w-50 uppercase">{{ selected_foot.foot_id | empty}}</span>
+                        </td>
+                        <td class="w-50">
+                            <span class="w-50">Age</span>
+                            <span class="w-50">{{ selected_foot.age | empty }}</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-50">
+                            <span class="w-50">Gender</span>
+                            <span class="w-50">{{ selected_foot.gender_name | empty }}</span>
+                        </td>
+                        <td class="w-50">
+                            <span class="w-50">Foot Type</span>
+                            <span class="w-50">{{ selected_foot[direction].foot_type | empty }}</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-50">
+                            <span class="w-50">Category</span>
+                            <span class="w-50">{{ selected_foot.category_name | empty }}</span>
+                        </td>
+                        <td class="w-50">
+                            <span class="w-50">Arch Type</span>
+                            <span class="w-50">{{ selected_foot[direction].arch_type | empty }}</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-50">
+                            <span class="w-50">Size</span>
+                            <span class="w-50">{{ selected_foot[direction].size | empty }}</span>
+                        </td>
+                        <td class="w-50">
+                            <span class="w-50">L/R</span>
+                            <span class="w-50">{{ selected_foot.left_right | empty }}</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-50">
+                            <span class="w-50">Weight</span>
+                            <span class="w-50">{{ selected_foot.weight_value | empty }} </span>
+                        </td>
+                        <td class="w-50">
+                            <span class="w-50">Scanner</span>
+                            <span class="w-50">{{ selected_foot.scanner_name | empty }}</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-50">
+                            <span class="w-50">Height</span>
+                            <span class="w-50">{{ selected_foot.height_value | empty }} </span>
+                        </td>
+                        <td class="w-50">
+                            <span class="w-50">Added Date</span>
+                            <span class="w-50">{{ selected_foot.invented_at | empty }}</span>
+                        </td>
+                    </tr>
+                    <tr class="w-100">
+                        <td class="w-50">
+                            <span class="w-50">Country</span>
+                            <span class="w-50">{{ selected_foot.country_name | empty }}</span>
+                        </td>
+                        <td class="w-50">
+                            <span class="w-50">Notes</span>
+                            <span class="w-50">{{ selected_foot.note | empty }}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="w-100 px-2 infos-table" *ngIf="isAverage">
+        <h4><span>Foot Average </span> <b class="uppercase">{{ selected_foot.foot_id }}</b></h4>
+        <div class="w-100">
+            <table class="w-100">
+                <tbody class="w-100">
+                    <tr class="w-100">
+                        <td class="w-100 p-1 text-center" colspan="2">Filters</td>
+                    </tr>
+                    <tr class="w-100" *ngIf="filterkeys().length == 0">
+                        <td class="w-100 p-1 text-center" colspan="2"> No Filter Selected </td>
+                    </tr>
+                    <ng-container *ngFor="let key of filterkeys(); let i = index">
+                        <tr class="w-100">
+                            <td class="w-50">
+                                <span class="w-50">{{ key[0] | translate }}</span>
+                                <span class="w-50">{{ getFilterValue(selected_foot.filter[key[0]]) | translate}}</span>
+                            </td>
+                            <td class="w-50" *ngIf="key.length > 1">
+                                <span class="w-50">{{ key[1] | translate }}</span>
+                                <span class="w-50">{{ getFilterValue(selected_foot.filter[key[1]]) | translate}}</span>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="scene-container" style="height: 25vh;">
+        <div class="actions">
+            <span *ngIf="selected_foot.left_status" class="mini-btn btn-primary py-0 m-1"
+                [ngClass]="{active: direction == 'left'}" (click)="selectFootDirection('left')">Left</span>
+            <span *ngIf="selected_foot.right_status" class="mini-btn btn-primary py-0 m-1"
+                [ngClass]="{active: direction == 'right'}" (click)="selectFootDirection('right')">Right</span>
+
+        </div>
+        <img src="assets/icons/full-screen-icon.svg" alt="full-screen-icon" class="full-screen-icon"
+            (click)="onFullScreen()">
+        <app-main-scene [zoom]="zoom"></app-main-scene>
+
+    </div>
+    <div class="w-100 px-2 pb-2 metrics-table" *ngIf="isProcessed()">
+        <h4 class="w-100">
+
+            <div class="all-metrics-icon">
+                <img width="16px" 
+                    src="assets/icons/{{ showAll ? 'eye-icon-white.svg': 'close-eye-icon-white.svg' }}"
+                    alt="eye icon" (click)="toggleAll()">
+                <span style="font-size: 1rem;">All</span>
+            </div>
+            Metrics
+        </h4>
+        <div class="w-100 flex-grow-1" style="overflow-y:auto;">
+            <table class="w-100">
+                <tbody class="w-100">
+                    <ng-container *ngFor="let mesure of mesures; let i = index">
+                        <tr class="w-100 test" *ngIf=" i % 2 == 0 ">
+                            <td class="w-50">
+                                <span class="w-15"><img *ngIf="mesure.mesure" (click)="toggle(mesure.slug)"
+                                        src="assets/icons/{{ mesure.show ? '':'close-' }}eye-icon.svg"
+                                        alt="eye icon"></span>
+                                <span class="w-55">{{ mesure.name }}</span>
+                                <span class="w-30">{{ mesure.data }}</span>
+                            </td>
+                            <td class="w-50" *ngIf="mesures[i+1]">
+                                <span class="w-15"><img *ngIf="mesures[i+1].mesure" (click)="toggle(mesures[i+1].slug)"
+                                        src="assets/icons/{{ mesures[i+1].show ? '':'close-' }}eye-icon.svg"
+                                        alt="eye icon"></span>
+                                <span class="w-55">{{ mesures[i+1].name }}</span>
+                                <span class="w-30">{{ mesures[i+1].data }}</span>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="!isProcessed()" class="d-flex align-items-center justify-content-center">
+        <h1 *ngIf="!isError()">Processing</h1>
+        <h1 *ngIf="isError()">Error</h1>
+    </div>
+</div>
+
+<app-full-screen [isAverage]="isAverage"  [showAll]="showAll" [direction]="direction"  [selected_foot]="selected_foot" *ngIf="is_full_screen" ></app-full-screen>

@@ -1,0 +1,142 @@
+<div class="full-body">
+    <div class="w-100 h-100 d-flex flex-column p-2 admin-container overflow-y-auto">
+        <div class="header">
+            <button class="btn-back" [routerLink]="['/admin']"> <img src="assets/icons/arrow-to-left.svg"
+                    alt="back button"> Back</button>
+            <div class="d-flex align-items-center title">
+                <img src="assets/icons/company-icon.svg" alt="Company Icon">
+                <p class="m-0 pt-1">Companies</p>
+            </div>
+            <div class="search">
+                <input type="search" placeholder="Search" (search)="search()" (keyup)="search()" [(ngModel)]="searchText">
+            </div>
+        </div>
+        <div class="flex-grow-1 d-flex flex-column mx-auto w-100 justify-content-start">
+            <div class="flex-grow-1 table">
+                <table class="table listing-table">
+                    <thead class="table-dark sticky">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Contry</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Users</th>
+                            <th scope="col">Data Quantity</th>
+                            <th scope="col">Enabled</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody *ngIf="companies.length > 0">
+                        <tr *ngFor="let company of companies_to_show">
+                            <td>
+                                <span>{{ company.name | empty}}</span>
+                            </td>
+                            <td>
+                                <span>{{ company.country_name | empty}}</span>
+                            </td>
+                            <td>
+                                <span>{{ company.city | empty}}</span>
+                            </td>
+                            <td>
+                                <span>{{ company.users_counter | empty}} Users</span>
+                            </td>
+                            <td style="font-size: 1rem;">
+                                IF : {{ company.max_if | empty }} <br> 
+                                AF : {{ company.max_af | empty }}
+                            </td>
+                            <td>
+                                <img src="assets/icons/{{ company.enabled ? 'enabled' : 'disabled' }}-icon.svg"
+                                    alt="enabled icon" width="30px">
+                            </td>
+                            <td>
+                                <button (click)="showInfos(company)" class="mini-btn-gray btn-primary py-0 m-1">
+                                    Infos
+                                </button>
+                                <button class="mini-btn-gray btn-primary py-0 m-1">
+                                    Activity
+                                </button>
+                                <br>
+                                <button [routerLink]="['/admin/companies' , company.ref, 'users']" class="mini-btn-primary btn-primary py-0 m-1">
+                                    Users
+                                </button>
+                                <button class="mini-btn-primary btn-primary py-0 m-1">
+                                    Actions
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h1 class="w-100 text-center pt-3" *ngIf="!(companies.length > 0)">Companies List is Empty</h1>
+            </div>
+            <div class="w-95 mx-auto p-2">
+                <button class="btn btn-primary px-3 rounded-40" (click)="showAddCompany()">
+                    <img class="p-1 pe-2" src="assets/icons/plus-icon.svg" alt="plus icon">
+                    Add a company
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<app-popup-ui (cancel)="cancel()" *ngIf="open_popup" class="w-60">
+    <h4 title class="text-center text-primary">
+        {{ selected_company ? "Company Info" : "New Company" }}
+    </h4>
+    <form message class="row pe-4" (ngSubmit)="onSubmitCompany()" [formGroup]="addCompanyForm" autocomplete="off" style="width: 50vw; position: relative;">
+        <div class="col w-50">
+            <app-field name="ID" *ngIf="selected_company">
+                <input autocomplete="off" formControlName="ref" class="dm-text-input" type="text"
+                    name="ref" id="ref">
+            </app-field>
+            <app-field name="Name" [required]="!selected_company" >
+                <input autocomplete="off" formControlName="name" class="dm-text-input" type="text"
+                    name="name" id="name">
+            </app-field>
+            <app-field name="City" [required]="!selected_company" >
+                <input autocomplete="off" formControlName="city" class="dm-text-input" type="text"
+                    name="city" id="city" >
+            </app-field>
+            <app-searchable-select name="Country" [list]="countries" [required]="!selected_company" 
+            [selected_item]="selected_company ? selected_company.country : ''"
+                (select_event)="select_contry($event)"></app-searchable-select>
+            <app-field name="SIRET" [required]="!selected_company" >
+                <input autocomplete="off" formControlName="siret" class="dm-text-input" type="text"
+                    name="siret" id="siret">
+            </app-field>
+        </div>
+
+        <div class="col w-50 ms-4 ">
+            <app-field name="TVA" [required]="!selected_company" >
+                <input autocomplete="off" formControlName="tva" class="dm-text-input" type="text"
+                    name="tva" id="tva">
+            </app-field>
+            <app-field name="Phone" [required]="!selected_company" >
+                <input autocomplete="off" formControlName="phone" class="dm-text-input" type="text"
+                    name="phone" id="phone"  pattern="[- +()0-9]+">
+            </app-field>
+            <div class=" d-flex justify-content-start align-items-center mt-3">
+                <span for="users_limit" style="font-size: 15px;">User Limit</span>
+                <input type="number" class="form-control w-10 ms-4" formControlName="users_limit" name="users_limit" id="users_limit">
+              </div>
+              <div class="d-flex mt-3">
+                <div class=" d-flex justify-content-start align-items-center">
+                    <span for="users_limit" style="font-size: 15px;">Max IF</span>
+                    <input type="number" class="form-control w-50 text-center ms-4" formControlName="max_if" name="users_limit" id="users_limit">
+                  </div>
+                  <div class=" d-flex justify-content-start align-items-center">
+                    <span for="users_limit" style="font-size: 15px;">Max AF</span>
+                    <input type="number" class="form-control text-center w-50 ms-4" formControlName="max_af" name="users_limit" id="users_limit">
+                  </div>
+                      
+              </div>  
+        </div>
+        <div class="d-flex justify-content-center mt-5">
+            <button class="btn btn-primary px-4" [disabled]="addCompanyForm.invalid && !selected_company" (click)="onSubmitCompany()">
+              <img src="assets/icons/check-icon.svg" alt="close icon" width="16px" class="me-2">
+              {{ selected_company ? "Save" : "Add Company" }}
+            </button>
+          </div>
+    </form>
+    <app-spinner-html spinner *ngIf="isLoading"></app-spinner-html>
+</app-popup-ui>

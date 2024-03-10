@@ -1,0 +1,80 @@
+.dm-badge{
+    display: flex;
+    align-items: center;
+    background-color: $primary;
+    color: white;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    border-radius: 0.3rem;
+    border: 1px solid darken($primary, 10);
+    &>p{
+        padding: 0 0.4rem;
+        font-size: 1rem;
+        margin: 0;
+        &:first-child{
+            border-right: 0.1rem solid white;
+            padding-right: 1rem;
+        }
+        &:last-child{
+            margin-left: 1rem;
+        }
+    }
+}
+
+.dm-badge-success {
+    display: flex;
+    align-items: center;
+    background-color: $success;
+    color: white;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    border-radius: 0.3rem;
+    border: 1px solid darken($success, 10);
+    &>p{
+        padding: 0 0.4rem;
+        font-size: 1rem;
+        margin: 0;
+        &:first-child{
+            border-right: 0.1rem solid white;
+            padding-right: 1rem;
+        }
+        &:last-child{
+            margin-left: 1rem;
+        }
+    }
+}
+
+.filter{
+    padding: 0 0.1rem 0 0.75rem;
+    background-color: rgba($dark , 0.7);
+    border-radius: 1rem;
+    margin: 0 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &>p{
+        width: max-content;
+        font-size: 0.8rem;
+        color: white;
+        margin: 0;
+    }
+    &>img{
+        margin: 0 0.2rem;
+        padding: 0.2rem;
+        height: 70%;
+        display: block;
+        border-radius: 1rem;
+        transform: scale(1);
+        transition: transform 100ms ease-in;
+        &:hover{
+            transform: scale(1.2);
+        }
+    }
+    &.all{
+        padding: 0 0.1rem 0 0.1rem;
+        &>img{
+            border: 1px solid white;
+            // padding: 0.2rem;
+        }
+    }
+}

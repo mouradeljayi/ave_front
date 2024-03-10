@@ -1,0 +1,69 @@
+
+@import "./variables";
+
+// @each $name, $color in $colors {
+//     @for $size from 0 to 21 {    
+//         .bg-#{$name}-#{$size * 5} {
+//           background-color: rgba($color, $size * 5 * 1% );
+//         }
+//         .color-#{$name}-#{$size * 5} {
+//           color: rgba($color, $size * 5 * 1% );
+//         }
+//     }
+// }
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@mixin inline-flex-center {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+@each $size in $sizes {
+  .h-#{$size} {
+    height: $size * 1% !important;
+  }
+  .w-#{$size} {
+    width: $size * 1% !important;
+  }
+}
+
+@each $size in $small_sizes {
+    .rounded-#{$size} {
+      border-radius: $size * 1px !important;
+    }
+    .rounded-top-#{$size} {
+      border-top-left-radius: $size * 1px !important;
+      border-top-right-radius: $size * 1px !important;
+    }
+    .rounded-bottom-#{$size} {
+      border-bottom-left-radius: $size * 1px !important;
+      border-bottom-right-radius: $size * 1px !important;
+    }
+    .rounded-left-#{$size} {
+      border-bottom-left-radius: $size * 1px !important;
+      border-top-left-radius: $size * 1px !important;
+    }
+    .rounded-right-#{$size} {
+      border-bottom-right-radius: $size * 1px !important;
+      border-top-right-radius: $size * 1px !important;
+    }
+    .rounded-top-right-#{$size} {
+      border-top-right-radius: $size * 1px !important;
+    }
+    .rounded-top-left-#{$size} {
+      border-top-left-radius: $size * 1px !important;
+    }
+    .rounded-bottom-right-#{$size} {
+      border-bottom-right-radius: $size * 1px !important;
+    }
+    .rounded-bottom-left-#{$size} {
+      border-bottom-left-radius: $size * 1px !important;
+    }
+  }

@@ -1,0 +1,357 @@
+<div class="toolbox-card mx-3" @toggleToolBox *ngIf="animation_boolean"> 
+  <div class="toolbox-head d-flex justify-content-between align-items-center">
+    <h5 class="toolbox-heading">Toolbox</h5>
+    <div class="chevron-icon">
+      <img src="assets/icons/chevron-left-icon.svg" alt="" style="cursor: pointer" (click)="close()">
+    </div>
+  </div>
+  <div class="cut-border-bottom d-flex justify-content-between align-items-center" (click)="toggleContent(1)">
+    <h6 class="text-dark toolbox-heading2 ">Alignment</h6>
+    <div class="down-icon">
+      <img src="assets/icons/down-icon.svg" alt="" style="cursor: pointer"
+        [@rotateIcon1]="isContentVisible1 ? 'rotated' : 'normal'">
+    </div>
+  </div>
+  <section [@toggleContent]="isContentVisible1 ? 'hidden' : 'visible'">
+    <div class="d-flex  justify-content-between align-items-center mt-2 mb-2">
+      <button class="btn btn-primary px-3" type="button">Heel Alignement</button>
+
+      <button class="btn btn-primary px-4" type="button" (click)="initFoot()">Initial position</button>
+
+    </div>
+
+
+    <div class="foot-last">
+      <h5 class="last-foot-heading " (click)="switchTo('last')" [class.bg-secondary]="selected_object=== 'last'">
+        Last
+      </h5>
+      <h5 class="last-foot-heading " (click)="switchTo('foot')" [class.bg-secondary]="selected_object === 'foot'">
+        Foot
+      </h5>
+    </div>
+
+    <div [class.bg-secondary]="selected_object">
+
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center ">
+          <h6 class="text-dark toolbox-heading3 ">Translation</h6>
+          <img class="translation-icon" src="assets/icons/translation-icon.svg" alt="" style="cursor: pointer">
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="d-flex justify-content-around align-items-center">
+                <img (click)="translateObject(axis.x, -1)" class="button-icon" src="assets/icons/min-icon.svg" alt=""
+                  style="cursor: pointer">
+                <span class="rectangle">X</span>
+                <img (click)="translateObject(axis.x, 1)" class="button-icon" src="assets/icons/max-icon.svg" alt=""
+                  style="cursor: pointer">
+              </div>
+            </div>
+            <div class="col">
+              <div class="d-flex justify-content-around align-items-center">
+                <img (click)="translateObject(axis.y, -1)" class="button-icon" src="assets/icons/min-icon.svg" alt=""
+                  style="cursor: pointer">
+                <span class="rectangle">Y</span>
+                <img (click)="translateObject(axis.y, 1)" class="button-icon" src="assets/icons/max-icon.svg" alt=""
+                  style="cursor: pointer">
+              </div>
+            </div>
+            <div class="col">
+              <div class="d-flex justify-content-around align-items-center">
+                <img (click)="translateObject(axis.z,-1)" class="button-icon" src="assets/icons/min-icon.svg" alt=""
+                  style="cursor: pointer">
+                <span class="rectangle">Z</span>
+                <img (click)="translateObject(axis.z, 1)" class="button-icon" src="assets/icons/max-icon.svg" alt=""
+                  style="cursor: pointer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center">
+
+        <div class="row" *ngIf="selected_object === 'foot'">
+          <div class="col ms-4">
+            <span class="custom-input">{{foot_position.x}}</span>
+            <span class="custom-span">mm</span>
+          </div>
+          <div class="col ms-5">
+            <span class="custom-input">{{foot_position.y}}</span>
+            <span class="custom-span">mm</span>
+          </div>
+          <div class="col ms-5">
+            <span class="custom-input">{{foot_position.z}}</span>
+            <span class="custom-span">mm</span>
+          </div>
+        </div>
+
+
+        <div class="row" *ngIf="selected_object === 'last'">
+          <div class="col ms-4">
+            <span class="custom-input">{{last_position.x}}</span>
+            <span class="custom-span">mm</span>
+          </div>
+          <div class="col ms-5">
+            <span class="custom-input">{{last_position.y}}</span>
+            <span class="custom-span">mm</span>
+          </div>
+          <div class="col ms-5">
+            <span class="custom-input">{{last_position.z}}</span>
+            <span class="custom-span">mm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div [class.bg-secondary]="selected_object" class="pb-2 ">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center ">
+          <h6 class="text-dark toolbox-heading3 ">Rotation</h6>
+          <img class="rotation-icon" src="assets/icons/rotation-icon.svg" alt="" style="cursor: pointer;">
+        </div>
+      </div>
+
+      <div class="d-flex  justify-content-between align-items-center">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="d-flex justify-content-around align-items-center">
+                <img (click)="rotateObject(axis.x, -1)" class="button-icon" src="assets/icons/min-icon.svg" alt=""
+                  style="cursor: pointer">
+                <span class="rectangle">α</span>
+                <img (click)="rotateObject(axis.x, 1)" class="button-icon" src="assets/icons/max-icon.svg" alt=""
+                  style="cursor: pointer">
+              </div>
+            </div>
+            <div class="col">
+              <div class="d-flex justify-content-around align-items-center">
+                <img (click)="rotateObject(axis.y, -1)" class="button-icon" src="assets/icons/min-icon.svg" alt=""
+                  style="cursor: pointer">
+                <span class="rectangle">β</span>
+                <img (click)="rotateObject(axis.y, 1)" class="button-icon" src="assets/icons/max-icon.svg" alt=""
+                  style="cursor: pointer">
+              </div>
+            </div>
+            <div class="col">
+              <div class="d-flex justify-content-around align-items-center">
+                <img (click)="rotateObject(axis.z, -1)" class="button-icon" src="assets/icons/min-icon.svg" alt=""
+                  style="cursor: pointer">
+                <span class="rectangle">γ</span>
+                <img (click)="rotateObject(axis.z, 1)" class="button-icon" src="assets/icons/max-icon.svg" alt=""
+                  style="cursor: pointer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center">
+
+        <div class="row" *ngIf="selected_object === 'foot'">
+          <div class="col" style="margin-left: 3rem;">
+            <span class="custom-input">{{foot_rotation.x}}</span>
+            <span class="custom-span">°</span>
+          </div>
+          <div class="col" style="margin-left: 4rem;">
+            <span class="custom-input">{{foot_rotation.y}}</span>
+            <span class="custom-span">°</span>
+          </div>
+          <div class="col" style="margin-left: 4rem;">
+            <span class="custom-input">{{foot_rotation.z}}</span>
+            <span class="custom-span">°</span>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="selected_object === 'last'">
+          <div class="col" style="margin-left: 3rem;">
+            <span class="custom-input">{{last_rotation.x}}</span>
+            <span class="custom-span">°</span>
+          </div>
+          <div class="col" style="margin-left: 4rem;">
+            <span class="custom-input">{{last_rotation.y}}</span>
+            <span class="custom-span">°</span>
+          </div>
+          <div class="col" style="margin-left: 4rem;">
+            <span class="custom-input">{{last_rotation.z}}</span>
+            <span class="custom-span">°</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <div class="cut-border-bottom d-flex p-1 justify-content-between align-items-center" (click)="toggleContent(2)">
+    <div class="d-flex justify-content-between">
+      <h6 class="text-dark toolbox-heading2 ">Slicing</h6>
+      <img src="assets/icons/{{ plane_display ? '':'close-' }}eye-icon.svg" alt="eye-icon" width="25px"
+        style="cursor: pointer; margin-left: 14px" (click)="togglePlane(); $event.stopPropagation();">
+    </div>
+    <div class="down-icon">
+      <img src="assets/icons/down-icon.svg" alt="" style="cursor: pointer"
+        [@rotateIcon2]="isContentVisible2 ? 'rotated' : 'normal'">
+    </div>
+  </div>
+  <section [@toggleContent]="isContentVisible2 ? 'hidden' : 'visible'">
+    <div class="d-flex justify-content-between align-items-center mt-2">
+      <button class="btn btn-primary px-3" type="button" (click)="verticalPlane()">
+        <img class="custom-arrow-image" src="assets/icons/vertical-arrow-icon.svg" alt="">Vertical plan
+      </button>
+      <div>
+        <button class="btn btn-primary px-3" type="button" (click)="horizontalPlane()">
+          <img class="custom-arrow-image" src="assets/icons/horizontal-arrow-icon.svg" alt=""> Horizontal plan
+        </button>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center ">
+        <h6 class="text-dark toolbox-heading3 ">Translation</h6>
+        <img class="translation-icon" src="assets/icons/translation-icon.svg" alt="" style="cursor: pointer">
+      </div>
+    </div>
+
+    <div class="d-flex  justify-content-between align-items-center">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="d-flex  justify-content-around align-items-center">
+              <img (click)="movePlane(axis.x, -1, 'translate')" class="button-icon" src="assets/icons/min-icon.svg"
+                alt="" style="cursor: pointer">
+              <div class="rectangle">
+                <div class="center-text">X</div>
+              </div>
+              <img (click)="movePlane(axis.x, 1, 'translate')" class="button-icon" src="assets/icons/max-icon.svg"
+                alt="" style="cursor: pointer">
+            </div>
+          </div>
+          <div class="col">
+            <div class="d-flex  justify-content-around align-items-center">
+              <img (click)="movePlane(axis.y, -1, 'translate')" class="button-icon" src="assets/icons/min-icon.svg"
+                alt="" style="cursor: pointer">
+              <div class="rectangle">
+                <div class="center-text">Y</div>
+              </div>
+              <img (click)="movePlane(axis.y, 1, 'translate')" class="button-icon" src="assets/icons/max-icon.svg"
+                alt="" style="cursor: pointer">
+            </div>
+          </div>
+          <div class="col">
+            <div class="d-flex  justify-content-around align-items-center">
+              <img (click)="movePlane(axis.z, -1, 'translate')" class="button-icon" src="assets/icons/min-icon.svg"
+                alt="" style="cursor: pointer">
+              <div class="rectangle">
+                <div class="center-text">Z</div>
+              </div>
+              <img (click)="movePlane(axis.z, 1, 'translate')" class="button-icon" src="assets/icons/max-icon.svg"
+                alt="" style="cursor: pointer">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-around align-items-center">
+        <div>
+          <span class="custom-input">{{plane_position.x | number: '1.0-0' }}</span>
+          <span class="custom-span">mm</span>
+        </div>
+        <div>
+          <span class="custom-input">{{plane_position.y | number: '1.0-0' }}</span>
+          <span class="custom-span">mm</span>
+        </div>
+        <div >
+          <span class="custom-input">{{plane_position.z | number: '1.0-0' }}</span>
+          <span class="custom-span">mm</span>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center ">
+        <h6 class="text-dark toolbox-heading3 ">Rotation</h6>
+        <div class="rotation-icon">
+          <img src="assets/icons/rotation-icon.svg" alt="" style="cursor: pointer">
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="d-flex  justify-content-around align-items-center">
+              <img (click)="movePlane(axis.x, -1, 'rotate')" src="assets/icons/min-icon.svg" class="button-icon" alt=""
+                style="cursor: pointer">
+              <span class="rectangle">α</span>
+              <img (click)="movePlane(axis.x, 1, 'rotate')" src="assets/icons/max-icon.svg" class="button-icon" alt=""
+                style="cursor: pointer">
+            </div>
+          </div>
+          <div class="col">
+            <div class="d-flex  justify-content-between align-items-center">
+              <img (click)="movePlane(axis.y, -1, 'rotate')" src="assets/icons/min-icon.svg" class="button-icon" alt=""
+                style="cursor: pointer">
+              <span class="rectangle">β</span>
+              <img (click)="movePlane(axis.y, 1, 'rotate')" src="assets/icons/max-icon.svg" class="button-icon" alt=""
+                style="cursor: pointer">
+            </div>
+          </div>
+          <div class="col">
+            <div class="d-flex  justify-content-between align-items-center">
+              <img (click)="movePlane(axis.z, -1, 'rotate')" src="assets/icons/min-icon.svg" class="button-icon" alt=""
+                style="cursor: pointer">
+              <span class="rectangle">γ</span>
+              <img (click)="movePlane(axis.z, 1, 'rotate')" src="assets/icons/max-icon.svg" class="button-icon" alt=""
+                style="cursor: pointer">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-around align-items-center">
+        <div>
+          <span class="custom-input">{{plane_rotation.x | number: '1.0-0'}}</span>
+          <span class="custom-span">°</span>
+        </div>
+        <div>
+          <span class="custom-input">{{plane_rotation.y | number: '1.0-0'}}</span>
+          <span class="custom-span">°</span>
+        </div>
+        <div>
+          <span class="custom-input">{{plane_rotation.z | number: '1.0-0' }}</span>
+          <span class="custom-span">°</span>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end align-items-center">
+      <button class="btn btn-primary rounded-40 ps-5 py-1" type="button">
+        <img class="custom-arrow-slice-image" src="assets/icons/transh-icon.svg" alt="transh-icon"> Slice
+      </button>
+    </div>
+  </section>
+
+  <div class="toolbox-head d-flex justify-content-between align-items-center mt-2" (click)="toggleContent(3)">
+    <h5 class="toolbox-heading">Animation</h5>
+    <div class="chevron-icon">
+      <img src="assets/icons/down-white-icon.svg" alt="" style="cursor: pointer;"
+        [@rotateIcon3]="isContentVisible3 ? 'rotated' : 'normal'">
+    </div>
+  </div>
+
+  <section [@toggleContent]="isContentVisible3 ? 'hidden' : 'visible'">
+    <div class="d-flex p-2 justify-content-between align-items-center ">
+      <button class="btn btn-primary px-3" type="button">Start Rotation</button>
+      <div>
+        <button class="btn btn-primary px-3" type="button">Download Animation</button>
+      </div>
+    </div>
+  </section>
+
+</div>

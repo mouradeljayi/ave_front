@@ -1,0 +1,213 @@
+@import '../../../styles/variables';
+
+.add-last {
+  width: 56.25rem;
+  height: 100vh;
+  background-color: $white;
+  padding: 1.5625rem 1.5625rem;
+  box-shadow: 0.3125rem 0.625rem 1.375rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.3125rem;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 0.063rem solid $primary;
+  border-radius: 1.25rem;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  padding:0.143rem;
+  padding-left: 1.786rem;
+  color: $primary;
+  flex: 1;
+  border-radius: 1.429rem;
+  font-size: 1.143rem;
+  letter-spacing: 0.036rem;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.571rem;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.search-input::placeholder {
+  color: $primary; 
+  font-size: 1.071rem;
+}
+
+.custom-button-group {
+  display: inline-block;
+}
+
+.custom-button {
+  display: inline-block;
+  padding: 0.225rem 1.125rem;
+  background-color: $white;
+  border: 0.0625rem solid $primary;
+  font-size: 0.875rem;
+  color: $primary;
+  cursor: pointer;
+}
+
+.active-button {
+  background-color: $primary;
+  color: $white;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &>* {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4rem;
+    background-color: $secondary;
+    padding: 0.3rem 0 0.1rem 0;
+    margin: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    color: rgba($dark , 0.75);
+    font-weight: 700;
+    line-height: 10px;
+    cursor: default;
+    border: 0;
+    outline: none;
+
+    &:focus {
+      border: 0;
+      outline: none;
+    }
+
+    &.more {
+      &>b {
+        cursor: default;
+        padding-bottom: 0.5rem;
+      }
+    }
+
+    &.disabled {
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    &.active {
+      background-color: $primary;
+      color: white;
+    }
+
+    &:hover {
+      background-color: rgba($primary, 0.5);
+      transform: scale(1.1);
+    }
+  }
+
+  &>img {
+    padding: 0.5rem;
+  }
+}
+
+.clear-icon {
+  position: relative;
+  right: 0.500rem;
+  cursor: pointer;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.table-container {
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  .listing-table {
+      &> :not(caption)>*>* {
+          padding: 0.5rem 0.5rem;
+          background-color: unset;
+          border-bottom-width: 0;
+      }
+
+      thead tr {
+          &>th {
+              font-size: 0.8rem;
+              font-weight: 500;
+              background-color: $dark;
+              position: relative;
+              text-align: center;
+          }
+      }
+
+      tbody>tr {            
+          &:nth-child(2n+1) {
+              background-color: rgba($dark , 0.03);
+          }
+
+          &:hover {
+              background-color: rgba($dark , 0.05);
+          }
+          &.active{
+              background-color: rgba($primary, 0.15);
+          }
+
+          td {
+              position: relative;
+              vertical-align: middle;
+              text-align: center;
+
+              * {
+                  font-size: 0.9rem;
+                  font-weight: 500;
+                 
+              }
+
+              span {
+                  display: block;
+                  background-color: rgba($dark , 0.75);
+                  color: white;
+                  padding: 0.15rem 0.5rem 0 0.5rem;
+                  border-radius: 1rem;
+                  width: fit-content;
+                  min-width: 4rem;
+                  text-align: center;
+                  margin: auto;
+              }
+
+              &:nth-child(2n) {
+                  span {
+                      background-color: darken($secondary , 0.5);
+                      color: $dark;
+
+                  }
+              }
+
+              &:nth-child(2n+1) {
+                  span {
+                      background-color: rgba($dark , 0.65);
+                      color: white;
+                  }
+              }
+
+              &:nth-child(3) {
+                  span {
+                      background-color: lighten($dark , 0.25);
+                      color: white;
+
+                  }
+              }
+          }
+      }
+  }
+}
+

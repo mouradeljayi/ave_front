@@ -1,0 +1,50 @@
+<div class="info-container"   @infoState *ngIf="animation_boolean">
+    <div class="d-flex justify-content-end p-4">
+        <img src="assets/icons/cross-icon.svg" alt="close icon" class="ms-5" style="cursor: pointer;" (click)="close()">
+    </div>
+
+    <div class="p-5">
+        <div class="d-flex justify-content-start align-items-center bg-secondary p-3">
+            <img src="assets/icons/info-icon.svg" alt="icon info" class="cross-icon"> 
+            <h3 class="ms-4">Foot Information</h3>
+        </div>
+
+            <div *ngIf="selected_foot">
+
+                <div class="d-flex justify-content-between align-items-center pt-2 pb-2 ps-4 pe-4 bg-secondary">
+                    <span> Gender</span>
+                    <span class="badge bg-dark rounded-pill px-4">{{ selected_foot.gender_name | empty }}</span>
+                </div>
+                
+                <div class="d-flex justify-content-between  align-items-center pt-2 pb-2 ps-4 pe-4">
+                    <span> Category</span>
+                    <span class="badge bg-secondary text-dark rounded-pill px-4">{{ selected_foot.category_name | empty }}</span>
+                </div>
+                <div class="d-flex justify-content-between  align-items-center pt-2 pb-2 ps-4 pe-4 bg-secondary">
+                    <span> Size Type</span>
+                    <span class="badge bg-dark rounded-pill px-4">{{ selected_foot[direction].size | empty }}</span>
+                </div>
+                <div class="d-flex justify-content-between  align-items-center pt-2 pb-2 ps-4 pe-4">
+                    <span> Estimated Size</span>
+                    <span class="badge bg-secondary text-dark rounded-pill px-4">{{ selected_foot[direction].size | empty }}</span>
+                </div>
+                <div class="d-flex justify-content-between  align-items-center pt-2 pb-2 ps-4 pe-4 bg-secondary">
+                    <span> Wide Width</span>
+                    <span class="badge bg-dark rounded-pill px-4">{{ selected_foot.wide_width | empty }}</span>
+                </div>
+                <div class="d-flex justify-content-between  align-items-center pt-2 pb-2 ps-4 pe-4">
+                    <span> Shoe Type</span>
+                    <span class="badge bg-secondary text-dark rounded-pill px-4">{{ selected_foot.shoe_type | empty }}</span>
+                </div>
+                <div class="d-flex justify-content-between  align-items-center pt-2 pb-2 ps-4 pe-4 bg-secondary">
+                    <span> Standard</span>
+                    <span class="badge bg-dark rounded-pill px-4">{{ selected_foot.standard | empty }}</span>
+                </div>
+                <div class="d-flex justify-content-between  align-items-center pt-2 pb-2 ps-4 pe-4">
+                    <span> Status</span>
+                    <span class="badge bg-success rounded-pill px-4">Analysed and Optimized</span>
+                </div>
+            </div>
+        </div>
+    </div>
+

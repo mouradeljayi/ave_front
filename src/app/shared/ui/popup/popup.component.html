@@ -1,0 +1,17 @@
+
+<div class="popup-container">
+        <div class="position-relative overflow-hidden">
+            <ng-content select="[spinner]"></ng-content>
+            <div class="title">
+                <ng-content select="[title]"></ng-content>
+            </div>
+            <div class="message">
+                <ng-content select="[message]"></ng-content>
+            </div>
+            <div class="actions">
+                <ng-content select="[actions]"></ng-content>
+            </div>
+            <img (click)="hide();$event.stopPropagation();" class="cross-icon"
+                        src="assets/icons/cross-icon.svg" alt="close user menu">
+        </div>
+</div>

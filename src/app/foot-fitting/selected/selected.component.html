@@ -1,0 +1,84 @@
+<div class="main-container">
+    <div class="row ">
+        <div class="col-md-6" *ngIf="!selected_last">
+            <div class="card shadow-sm">
+                <h5 class="card-heading">
+                    <span>Selected Last</span>
+                </h5>
+                <div class="foot-scene">
+                    <button class="btn btn-primary rounded-40 px-4 shadow-sm border" type="button" (click)="openLastInventory()">
+                        <img class="custom-arrow-image" src="assets/icons/last-icon.svg" alt="last-icon" >Add a Last
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6" *ngIf="selected_last">
+            <div class="card shadow-sm" style="padding-bottom: 3.429rem;">
+                <h5 class="card-heading"><span>Selected Last</span>
+                    <img src="assets/icons/red-close-icon.svg" alt="red close icon" width="20px" class="me-2" (click)="clear('last')">
+                </h5>
+                <h6 class="ms-3 fw-bold text-decoration-underline">Reference : {{ selected_last.last_reference }}</h6>
+                <div class="d-flex ms-2">
+                    <h6 class="me-2 ms-2 fw-bold">Shoe Type : <span>{{ selected_last.last_shoe_type }}</span></h6>
+                    <h6 class="fw-bold">Status : <span>Analyzed</span></h6>
+                </div>
+                <div class="d-flex pe-2 ms-2">
+                    <h6 class="me-2 ms-2 fw-bold">Gender : <span>{{ selected_last.last_gender }}</span></h6>
+                    <h6 class="fw-bold">Category : <span>{{ selected_last.last_category }}</span></h6>
+                    <h6 class="ms-2 pe-2 fw-bold">Size : <span>{{ selected_last.last_pointure }}</span></h6>
+                </div>
+                <div class="d-flex ms-2">
+                    <h6 class="me-2 ms-2 fw-bold" *ngIf="selected_last.last_width">Width : <span>{{ selected_last.last_width }}</span></h6>
+                    <h6 class="fw-bold" *ngIf="selected_last.last_height">Height : <span>{{ selected_last.last_height }}mm</span></h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 ps-0" *ngIf="!selected_foot" >
+            <div class="card shadow-sm">
+                <h5 class="card-heading">
+                    <span>Selected Foot</span>
+                </h5>
+                <div class="foot-scene">
+                    <button class="btn btn-primary rounded-40 px-4 shadow-sm border" type="button" (click)="onpenFootInventory()">
+                        <img class="custom-arrow-image" src="assets/icons/foot-icon2.svg" alt="">Add a Foot
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 ps-0" *ngIf="selected_foot">
+            <div class="card shadow-sm">
+                <h5 class="card-heading"><span>Selected Foot</span>
+                    <img src="assets/icons/red-close-icon.svg" alt="red close icon" width="20px" class="me-2" (click)="clear('foot')">
+                </h5>
+                    <h6 class="ms-3 fw-bold text-decoration-underline">Foot ID : {{ selected_foot.foot_id | empty | uppercase }}</h6>
+                <div class="d-flex ms-2">
+                    <h6 class="me-2 ms-2 fw-bold">Reference : <span>{{ selected_foot.reference | empty }}</span></h6>
+                    <h6 class="fw-bold">Category : <span>{{ selected_foot.category_name | empty }}</span></h6>
+                </div>
+                <div class="d-flex pe-2 ms-2">
+                    <h6 class="me-2 ms-2 fw-bold">Gender : <span>{{ selected_foot.gender_name | empty }}</span></h6>
+                    
+                    <h6 class="ms-2 pe-2 fw-bold">Shoe size : <span>{{ selected_foot.shoe_size | empty }}</span></h6>
+                </div>
+                <div class="d-flex pe-4 ms-2">
+                    <h6 class="me-2 ms-2 fw-bold">Weight : <span>{{ selected_foot.weight_value | empty }}</span></h6>
+                    <h6 class="fw-bold me-2">Size : <span>{{ selected_foot[direction].size | empty }}</span></h6>
+                    <h6 class="fw-bold">Scanner : <span>{{ selected_foot.scanner_name | empty }}</span></h6>
+                </div>
+                <div class="flex justify-content-start mt-2 mb-2 ms-2">
+                    <button class="btn btn-outline-primary rounded-40 px-4 btn-sm"  [ngClass]="{active: direction == 'left'}" (click)="selectFootDirection('left')">Left</button>
+                    <button class="btn btn-outline-primary rounded-40 px-4 btn-sm" [ngClass]="{active: direction == 'right'}" (click)="selectFootDirection('right')">Right</button>
+                </div>
+             
+            </div>
+        </div>
+    </div>
+
+   </div>
+
+
+  
+    

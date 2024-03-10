@@ -1,0 +1,63 @@
+<div class="add-last" @toggleLastInventory *ngIf="animation_boolean" >
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-start align-items-center">
+            <h5 class="mt-2 me-4 fw-bolder">Inventory</h5>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search">
+                <div class="search-icon">
+                    <img src="assets/icons/search-icon.svg" alt="search icon">
+                </div>
+            </div>
+        </div>
+        <img src="assets/icons/cross-icon.svg" alt="close icon" class="cross-icon" style="cursor: pointer;" (click)="close()">
+    </div>
+       <!--Table-->
+       <div class="flex-grow-1 mt-4" style="height: 57rem;">
+        <div class="w-100 h-100 overflow-y-auto table-container">
+            <!-- {{height}} -->
+            <table class="table listing-table">
+                <thead class="table-dark sticky">
+                    <tr>
+                        <th>Preview</th>
+                        <th>Reference</th>
+                        <th>Shoe Type</th>
+                        <th>Gender</th>
+                        <th>Category</th>
+                        <th>Computed Size</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let last of lasts" (click)="selectLast(last, 'analyse' )" class="pointer" >
+
+                        <td> <img src="{{ UserService.user.linked_platform }}/stl/{{ last.last_image }}/analyse/last_thumbnail.png" style="max-height: 30px;" alt="last icon"></td>
+                        <td> <span>{{last.last_reference}}</span>
+                        </td>
+                        <td> <span> {{last.last_shoe_type}} </span></td>
+                        <td> <span> {{last.last_gender}} </span></td>
+                        <td> <span> {{last.last_category}} </span></td>
+                        <td> <span> {{last.last_pointure}} </span></td>
+                        <td>
+                            <select class="custom-select">
+                                <option *ngFor="let statut of last.last_status" [value]="statut">{{ statut }}</option>
+                            </select>
+                           
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-around align-items-center">
+                                <img src="assets/icons/info-icon.svg" alt="icon info">
+                                <span class="text-bg-primary ms-2">
+                                    <img src="assets/icons/check-icon.svg" alt="check icon">
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>

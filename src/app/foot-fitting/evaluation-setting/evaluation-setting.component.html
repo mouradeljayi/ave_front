@@ -1,0 +1,137 @@
+<div class="evaluation-setting-card" @toggleSetting *ngIf="isVisible">
+
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <app-searchable-select name="Evaluation Setting" [list]="evaluation_setting"
+        (select_event)="select_evaluation_setting($event)">
+      </app-searchable-select>
+    </div>
+    <h1 class="evaluation-title">Evaluation Setting</h1>
+    <img src="assets/icons/cross-icon.svg" alt="close icon" width="16px" (click)="closeSetting()" style="cursor: pointer;">
+  </div>
+
+
+  <div class="row mt-4">
+    <div class="col-md-5">
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">Last Metrics (a)</th>
+            <th colspan="2">Foot Metrics (b)</th>
+            <th colspan="2">Differences</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let example of examples">
+
+          <tr *ngFor="let footMetric of example.footMetrics; let i = index">
+
+            <td *ngIf="footMetric.value !== undefined">{{ footMetric.name }}</td>
+            <td *ngIf="footMetric.value == undefined"><span>{{ footMetric.name }}</span></td>
+            <td>{{ footMetric.value !== undefined ? footMetric.value : '' }}</td>
+
+            <td *ngIf="example.lastMetrics[i].value !== undefined">{{ example.lastMetrics[i].name }}</td>
+            <td *ngIf="example.lastMetrics[i].value == undefined"><span>{{ example.lastMetrics[i].name }}</span></td>
+            <td>{{ example.lastMetrics[i].value !== undefined ? example.lastMetrics[i].value : '' }}</td>
+
+            <td class="d-flex align-items-center"
+              *ngIf="footMetric.value !== undefined && example.lastMetrics[i].value !== undefined">
+              <span>
+                + {{getDifference(footMetric.value, example.lastMetrics[i].value) | number: '1.2-2' }}
+              </span>
+              <span class="ms-4">(a-b)</span>
+            </td>
+          </tr>
+
+          <!-- <tr *ngFor="let footMetric of examples.footMetrics; let i = index">
+
+            <td *ngIf="footMetric.value !== undefined">{{ footMetric.name }}</td>
+            <td *ngIf="footMetric.value == undefined"><span>{{ footMetric.name }}</span></td>
+            <td>{{ footMetric.value !== undefined ? footMetric.value : '' }}</td>
+
+            <td *ngIf="examples.lastMetrics[i].value !== undefined">{{ examples.lastMetrics[i].name }}</td>
+            <td *ngIf="examples.lastMetrics[i].value == undefined"><span>{{ examples.lastMetrics[i].name }}</span></td>
+            <td>{{ examples.lastMetrics[i].value !== undefined ? examples.lastMetrics[i].value : '' }}</td>
+
+            <td class="d-flex align-items-center"
+              *ngIf="footMetric.value !== undefined && examples.lastMetrics[i].value !== undefined">
+              <span>
+                + {{getDifference(footMetric.value, examples.lastMetrics[i].value) | number: '1.2-2' }}
+              </span>
+              <span class="ms-4">(a-b)</span>
+            </td>
+          </tr> -->
+
+        </tbody>
+      </table>
+
+    </div>
+    <div class="col-md-7 ">
+      <table id="second-table">
+        <thead>
+          <tr>
+            <th>Min</th>
+            <th style="width: 500px;">Tolerances</th>
+            <th>Max</th>
+            <th>Weight</th>
+            <th>Enable</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let example of examples">
+          <tr *ngFor="let ex of example.footMetrics; let i = index">
+            <td>
+              <input type="text" 
+              [value]="example.tolerances[i].min"  
+              [disabled]="!example.tolerances[i].enabled">
+            </td>
+            <td>
+              <app-slider [disabled]="example.tolerances[i].enabled" ></app-slider>
+            </td>
+            <td>
+              <input type="text" 
+              [value]="'+' + example.tolerances[i].max"  
+              [disabled]="!example.tolerances[i].enabled">
+            </td>
+            <td>
+              <input type="text" 
+               [value]="!example.tolerances[i].enabled ? 0 + '%' : example.tolerances[i].weight + '%'" 
+              (input)="updateWeight(example.tolerances[i], $event)"  
+              [disabled]="!example.tolerances[i].enabled">
+            </td>
+            <td>
+              <img 
+              (click)="toggleIcon(example.tolerances[i])"
+              src="assets/icons/{{ example.tolerances[i].enabled ? 'enabled' : 'disabled' }}-icon.svg" 
+              alt="enabled icon" width="25px">
+            </td>
+           
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <input type="text" class="custom-input" 
+              [value]="totalWeight + '%'" disabled
+              [ngClass]="{ 'red-input': totalWeight <= 100, 'green-input': totalWeight === 100}">
+          </td>
+          </tr>
+         
+        </tbody>
+    
+      </table>
+      
+        
+    </div>
+    
+  </div>
+
+
+  <div class="d-flex justify-content-center" style="margin-top: 25rem;">
+    <button class="btn btn-primary px-4">
+      <img src="assets/icons/check-icon.svg" alt="close icon" width="16px" class="me-2">
+      Save
+    </button>
+  </div>
+
+
+</div>

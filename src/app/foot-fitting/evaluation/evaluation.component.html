@@ -1,0 +1,71 @@
+<div class="listing-card">
+    <app-matching></app-matching>
+
+    <!-- <h4 class="listing-heading mt-2">
+        <img src="assets/icons/modification-icon.svg" alt="edit icon" width="20px">
+        Evaluation Report
+    </h4> -->
+    <div class="listing-heading d-flex justify-content-around">
+        <div class="w-50">
+            <img src="assets/icons/modification-icon.svg" alt="edit icon" width="20px">
+            <span class="title">Evaluation Report</span>
+        </div>
+
+       
+            <app-searchable-select name="Evaluation Setting" class="w-100 px-3" [list]="evaluation_setting"
+                (select_event)="select_evaluation_setting($event)">
+            </app-searchable-select>
+      
+        <div class="pe-2" >
+            <img src="assets/icons/evaluation-setting-icon.svg" alt="Evaluation Setting Icon" style="cursor: pointer;" (click)="openSetting()">
+        </div>
+    </div>
+
+    <div class="pe-4 ps-4" *ngIf="localService.selected_foot_id">
+        <div class="card border-0">
+
+
+            <div class="d-flex justify-content-around card-heading">
+                <span style="font-size: 1rem;">Last Metrics</span>
+                <span style="font-size: 1rem;">Foot Metrics</span>
+            </div>
+            <div class="text-center mt-1">
+                <p>Fitting Score : <span class="text-success">98%</span></p>
+            </div>
+
+            <div class="w-100 px-2 pb-2 metrics-table">
+
+                <div class="w-100 flex-grow-1" style="overflow-y: auto">
+                    <table class="w-100">
+                        <tbody class="w-100">
+                            <tr class="w-100 test">
+                                <td class="w-50 text-center"> <b> Foot Mesures </b></td>
+                                <td class="w-50 text-center"> <b> Last Mesures </b></td>
+                            </tr>
+                            <ng-container *ngFor="let mesure of mesures; let i = index">
+                                <tr class="w-100 test">
+                                    <td class="w-50">
+                                        <span class="w-15"><img *ngIf="mesure.mesure" (click)="toggle(mesure.slug)"
+                                                src="assets/icons/{{ mesure.show ? '':'close-' }}eye-icon.svg"
+                                                alt="eye icon">
+                                        </span>
+                                        <span class="w-55">{{ mesure.name }}</span>
+                                        <span class="w-30">{{ mesure.data }}</span>
+                                    </td>
+                                    <td class="w-50">
+                                        <ng-container *ngIf="last_mesures[i]">
+                                            <span class="w-15"><img *ngIf="last_mesures[i]" (click)="toggle(last_mesures[i].slug, 'last')"
+                                                    src="assets/icons/{{ last_mesures[i].show ? '':'close-' }}eye-icon.svg"
+                                                    alt="eye icon">
+                                            </span>
+                                            <span class="w-55">{{ last_mesures[i].name }}</span>
+                                            <span class="w-30">{{ last_mesures[i].data }}</span>
+                                        </ng-container>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+

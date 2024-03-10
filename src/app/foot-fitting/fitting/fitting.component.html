@@ -1,0 +1,15 @@
+<div class="row postition-relative">
+    <div class="col-md-7">
+      <app-top-bar></app-top-bar>
+      <app-foot-scene></app-foot-scene>
+    </div>
+    <div class="col-md-5 ps-0 pre-0 custom-col">
+      <router-outlet #routerOutlet></router-outlet>
+    </div>
+  </div>
+<app-add-last class="position-absolute-open"></app-add-last>
+<app-add-foot class="position-absolute-open"></app-add-foot>
+<app-toolbox class="position-absolute"></app-toolbox>
+<app-foot-info></app-foot-info>
+<div *ngIf="isOverlay" class="overlay"></div>
+<app-evaluation-setting class="evaluation-setting"></app-evaluation-setting>

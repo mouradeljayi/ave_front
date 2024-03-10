@@ -1,0 +1,185 @@
+@import '../../../styles/variables';
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+    height: 100%;
+
+    a {
+        img {
+            width: 3.5rem;
+        }
+    }
+}
+
+
+.menu {
+    display: flex;
+    align-items: flex-end;
+    flex: 9;
+
+    a {
+        min-width: 200px;
+        color: rgba($dark , 0.75);
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+        .fitting{
+            path{
+                stroke-width: 0.35px
+            }
+        }
+        * {
+            cursor: pointer;
+        }
+
+        .fill {
+            fill: rgba($dark , 0.75);
+        }
+
+        .stroke {
+            stroke: rgba($dark , 0.75);
+        }
+
+        &.active,
+        &:hover {
+            background-color: rgba($dark, $alpha: 0.05);
+            color: $primary;
+
+            .fill {
+                fill: $primary;
+            }
+
+            .stroke {
+                stroke: $primary;
+            }
+        }
+
+        p {
+            font-size: 1rem;
+        }
+    }
+}
+
+.account {
+    flex: 2;
+    height: 100%;
+
+    &>div {
+        position: relative;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        height: 100%;
+        padding: 0 1rem;
+
+        &>img {
+            cursor: pointer;
+            width: 2.5rem;
+            padding: 0.3rem;
+            background-color: rgba($dark , 0.2);
+            border-radius: 0.5rem;
+        }
+
+        p {
+            cursor: pointer;
+            color: $dark;
+            margin: 0;
+            margin-left: 0.5rem;
+            font-size: 1rem;
+        }
+    }
+
+    .user-menu {
+        &.open {
+            top: 100%;
+            opacity: 1;
+        }
+
+        position: absolute;
+        z-index: 13;
+        top: -300px;
+        opacity: 0;
+        transition: all 250ms ease-in;
+        right: 0;
+        width: 230px;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 0.5rem;
+
+        &>div {
+            p {
+                color: rgba($dark , 0.75);
+            }
+            padding: 0.8rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            
+        }
+
+        &>a {
+            display: block;
+            padding: 0.75rem;
+
+            &:nth-child(2n) {
+                background-color: rgba($dark , 0.05);
+                &:hover{
+                    background-color: rgba($primary , 0.2);
+                }
+            }
+            &:hover{
+                background-color: rgba($primary , 0.2);
+            }
+        }
+
+        img {
+            cursor: pointer;
+            width: 1.4rem;
+            margin-right: 1.5rem;
+            
+            &.cross-icon {
+                margin-right: 0;
+                display: block;
+                width: 1rem;
+                cursor: pointer;
+            }
+        }
+    }
+}
+.language{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: $primary;
+    color: white;
+    right: -33px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 3rem;
+    box-shadow: 0px 0px 10px rgba($primary, 0.25);
+    cursor: pointer;
+    p{
+        display: block;
+        cursor: pointer;
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 100;
+        padding-top: 3px;
+        text-transform: capitalize;
+    }
+}
+
+.back{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($dark , 0.1 );
+    top: 0;
+    left: 0;
+    z-index: 12;
+  }

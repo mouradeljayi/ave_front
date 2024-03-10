@@ -1,0 +1,99 @@
+@import "../../../../styles/variables";
+
+.field-container {
+    border: 1px solid $secondary;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0;
+    margin: 0.75vh 0;
+    width: 100%;
+    // &.field-shadow{
+    //     box-shadow: 0px 2px 2px -2px rgba(0, 0, 0, 0.5);
+    // }
+
+    &>div:first-child {
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+        border-right: 1px solid $secondary;
+
+        &>p.name {
+            margin: 0;
+            display: block;
+            margin-right: 1rem;
+            font-size: 1rem;
+            &.capitalize{
+                text-transform: capitalize;
+            }
+        }
+
+        &>div {
+            display: flex;
+            padding: 0 0.5rem;
+
+            &>span {
+                position: relative;
+                display: block;
+                width: 1rem;
+                height: 1rem;
+                text-align: center;
+                border-radius: 1rem;
+                color: #fff;
+                margin: 0.1rem 0.3rem;
+                cursor: pointer;
+                line-height: 1.75rem;
+
+                &::before {
+                    display: none;
+                    position: absolute;
+                    content: "";
+                    top: 50%;
+                    left: calc(100% + 4px);
+                    background-color: $dark;
+                    color: white;
+                    width: 1rem;
+                    height: 1rem;
+                    transform: rotate(45deg) translateX(-60%);
+                    z-index: 3;
+                }
+
+                &::after {
+                    font-size: 0.8rem;
+                    z-index: 3;
+                    display: none;
+                    position: absolute;
+                    content: attr(data-help);
+                    top: 50%;
+                    transform: translateY(-50%);
+                    left: 100%;
+                    background-color: $dark;
+                    padding: 5px;
+                    border-radius: 5px;
+                    color: white;
+                    width: max-content;
+                    max-width: 200px;
+                }
+
+                &:hover::after,
+                &:hover::before {
+                    display: block;
+                }
+
+                &.help {
+                    background-color: rgba($dark, 0.3);
+                    font-size: 0.8rem;
+                }
+
+                &.required {
+                    background-color: $danger;
+                }
+            }
+        }
+    }
+
+    &>div:nth-child(2) {
+        flex-grow: 1;
+        padding: 0 1rem;
+    }
+}

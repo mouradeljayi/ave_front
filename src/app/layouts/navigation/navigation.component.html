@@ -1,0 +1,98 @@
+<div class="back" *ngIf="isUserMenu" (click)="hideUserMenu()"></div>
+<div class="w-100 h-100 d-flex align-items-center justify-content-between ps-4">
+    <div class="logo">
+        <a [routerLink]="['/home']">
+            <img src="assets/logo/footengineers_logo.svg" alt="Logo Foot Engineers">
+        </a>
+    </div>
+    <div class="h-100 menu">
+
+        <a [routerLink]="['/foot-inventory']" routerLinkActive="active" class="d-flex align-items-center justify-content-center pt-2 pb-3 px-3 mx-4">
+            <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M16.6667 0.5H0V5.5H0.833333V15.5H15.8333V5.5H16.6667V0.5ZM1.66667 2.16667H15V3.83333H1.66667V2.16667ZM14.1667 13.8333H2.5V5.5H14.1667V13.8333Z"
+                    class="fill" />
+                <path d="M10.8333 7.1665H5.83331V8.83317H10.8333V7.1665Z" class="fill" />
+            </svg>
+            <p class="pt-1 px-2 m-0">{{'Database' | translate }}</p>
+        </a>
+
+        <a [routerLink]="['/foot-averaging']" routerLinkActive="active" class="d-flex align-items-center justify-content-center pt-2 pb-3 px-3 mx-4">
+            <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_3264_14598)">
+                    <path d="M18 0.5H0V18.5H18V0.5Z" fill="white" fill-opacity="0.01" />
+                    <path d="M1.5 2V17H16.5" class="stroke" stroke-width="1.2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M3.75 14.75C3.75 14.75 5.74219 2 10.125 2C14.5078 2 16.5 14.75 16.5 14.75" class="stroke"
+                        stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M3 9.5H18" class="stroke" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-dasharray="2 6" />
+                </g>
+                <defs>
+                    <clipPath id="clip0_3264_14598">
+                        <rect width="18" height="18" fill="white" transform="translate(0 0.5)" />
+                    </clipPath>
+                </defs>
+            </svg>
+            <p class="pt-1 px-2 m-0">{{ 'Foot Averaging' | translate }}</p>
+        </a>
+
+        <a [routerLink]="['/data-analytics']" routerLinkActive="active" class="d-flex align-items-center justify-content-center pt-2 pb-3 px-3 mx-4">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M13.3333 13.3333V2.5H10V0H5V7.5H1.66667V13.3333H0V15H15V13.3333H13.3333ZM3.33333 13.3333V9.16667H5V13.3333H3.33333ZM6.66667 13.3333V1.66667H8.33333V13.3333H6.66667ZM10 13.3333V4.16667H11.6667V13.3333H10Z"
+                    class="fill" />
+            </svg>
+
+            <p class="pt-1 px-2 m-0">{{ 'Data Analytics' | translate }}</p>
+        </a>
+
+        <a [routerLink]="['/foot-fitting']" routerLinkActive="active" class="d-flex align-items-center justify-content-center pt-2 pb-3 px-3 mx-4">
+
+            <!-- <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M13.3333 13.3333V2.5H10V0H5V7.5H1.66667V13.3333H0V15H15V13.3333H13.3333ZM3.33333 13.3333V9.16667H5V13.3333H3.33333ZM6.66667 13.3333V1.66667H8.33333V13.3333H6.66667ZM10 13.3333V4.16667H11.6667V13.3333H10Z"
+                    class="fill" />
+            </svg> -->            
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="20.87" height="15.66" viewBox="0 0 20.87 15.66" class="fitting">
+                      <path d="M12.71.3c-.14.14-.19,1.05-.19,3.15v2.2a1.66,1.66,0,0,1-.6,1.27h0a12.23,12.23,0,0,1-1.79,1.15L9,8.72,9.36,9c.42.27.43.27,1.42-.25a6.08,6.08,0,0,0,2.44-2c.18-.34.23-1.09.23-3.42,0-2.61,0-3-.25-3.1S12.92.09,12.71.3Z" class="fill stroke"/>
+                      <path d="M19,.32a11.88,11.88,0,0,0-.34,2.43l-.07.88a8.22,8.22,0,0,0,.21,2.66l.31,1.24c1,4,1,4.77-.13,5.5-.5.36-.64.37-2.12.3l-1.57-.08.67.52a2,2,0,0,0,1.59.53,2.89,2.89,0,0,0,3.07-2.14c.25-1,.14-1.78-.62-4.75A11.37,11.37,0,0,1,19.63,2c.12-1.11.1-1.53,0-1.69S19.24.06,19,.32Z" class="fill stroke"/>
+                      <path d="M17,6.61a1.11,1.11,0,0,0-.09.74,1.16,1.16,0,0,1-.34,1.08c-.39.44-.4.52-.2.74s.8.06,1.2-.62C18.24,7.53,17.75,5.9,17,6.61Z" class="fill stroke"/>
+                      <path d="M8,9.07c-.12.2-.76-.3,5.92,4.81,1.17.9,1.65,1.17,1.77,1s.14-.18.09-.22c-.52-.44-7.56-5.81-7.61-5.81S8,9,8,9.07Z" class="fill stroke"/>
+                      <path d="M5.72,11.15c-.9.28-2.46.68-3.45.9-.48.1-.94.21-1.31.32a1.1,1.1,0,0,0-.71,1.56.54.54,0,0,0,.14.18,61.66,61.66,0,0,0,8.46,1.38c1.59.09,1.67.07,2.39-.34A6.28,6.28,0,0,0,13,13.85c0-.06-.17-.2-.35-.31s-.46-.12-1.34.43a2.66,2.66,0,0,1-1.79.64c-1.36,0-8.55-1.13-8.37-1.31S2,13.07,3,12.83A32.25,32.25,0,0,0,8.42,11.2c.2-.18-.35-.6-.75-.59A19.16,19.16,0,0,0,5.72,11.15Z" class="fill stroke"/>
+              </svg>
+
+            <p class="pt-1 px-2 m-0">{{ 'Fitting' | translate }}</p>
+        </a>
+
+    </div>
+    <div class="d-flex align-items-center justify-content-end account">
+        <div (click)="showUserMenu()">
+            <img src="assets/icons/user-icon.svg">
+            <p>{{ UserService.user.name | slice:0:25 }}</p>
+            <div class="user-menu dm-shadow" [ngClass]="{open: isUserMenu}">
+                <div class="d-flex align-items-center justify-content-between">
+                    <p class="m-0">{{ UserService.user.name }}</p>
+                    <img (click)="hideUserMenu();$event.stopPropagation();" class="cross-icon"
+                        src="assets/icons/cross-icon.svg" alt="close user menu">
+                </div>
+                <a [routerLink]="['/scanners']" class="d-flex align-items-center justify-content-start">
+                    <img src="assets/icons/hand-scanner-icon.svg" alt="My Scanners">
+                    <p class="m-0">{{ 'My Scanners' | translate }}</p>
+                </a>
+                <a href="mailto: support@footengineers.com" class="d-flex align-items-center justify-content-start">
+                    <img src="assets/icons/message-icon.svg" alt="Support">
+                    <p class="m-0">{{ 'Support' | translate }}</p>
+                </a>
+                <a (click)="UserService.logout()" class="d-flex align-items-center justify-content-start">
+                    <img src="assets/icons/out-icon.svg" alt="Log Out">
+                    <p class="m-0">{{ 'Log Out' | translate }}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="language" (click)="switchLang(translate.getDefaultLang())">
+    <p>{{ translate.getDefaultLang() }}</p>
+</div>

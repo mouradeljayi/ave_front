@@ -1,0 +1,138 @@
+@import '../../../styles/variables';
+
+.toolbox-card {
+  width: 22.857rem;
+  height: auto;
+  background-color:$white;
+  box-shadow: 0.357rem 0.714rem 3.571rem rgba(0, 0, 0, 0.1);
+  border-radius:0.571rem;
+}
+
+.foot-last {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+}
+
+.last-foot-heading {
+  width: 50%;
+  text-align: center;
+  padding: 0.357rem;
+  margin: 0;
+}
+.toolbox-head {
+  background-color: $dark;
+  border-radius: 0.571rem 0.571rem 0px 0px;
+}
+.toolbox-heading {
+  margin-left: 1.786rem;
+  margin-top:  0.571rem;
+  color: $white;
+  font-weight: bold;
+  letter-spacing: 0.036rem;
+}
+.toolbox-heading2 {
+  margin-left: 0.857rem;
+  margin-top: 0.571rem;
+  font-weight: bold;
+  color: $white;
+  letter-spacing: 0.036rem;
+}
+
+.toolbox-heading3 {
+  margin-left: 1.071rem;
+  font-weight: bold;
+  color: $white;
+  letter-spacing: 0.036rem;
+}
+
+.chevron-icon {
+  margin-right: 0.429rem;
+}
+.down-icon {
+  margin-right: 1rem;
+}
+
+.cut-border-bottom {
+  position: relative;
+}
+
+.cut-border-bottom::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 2%;
+  right: 2%;
+  height: 0.143rem;
+  background-color: rgba(128, 128, 128, 0.2);
+}
+
+.translation-icon {
+  margin-left: 1rem;
+  margin-bottom: 0.714rem;
+}
+.rotation-icon {
+  margin-left: 2rem;
+  margin-bottom: 0.714rem;
+}
+.rectangle {
+  width: 1.429rem;
+  height: 1.429rem;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  padding-top: 0.214rem;
+  font-size: 1.071rem;
+  text-align: center;
+}
+.rectangle img {
+  width: 1.143rem;
+  height: 1.143rem;
+  margin: 0 0.357rem;
+  cursor: pointer;
+}
+
+.custom-input {
+  padding: 0.5rem;
+  width: 50%;
+  font-size: 1rem;
+  background-color: transparent;
+}
+
+.custom-span {
+  position: relative;
+  font-size: 1rem;
+}
+
+.custom-arrow-image {
+  border-radius: 50%;
+  background-color: white;
+  padding: 0.357rem;
+  position: relative;
+  right: 0.357rem;
+}
+
+.custom-arrow-slice-image {
+  border-radius: 50%;
+  background-color: white;
+  padding: 0.357rem;
+  position: relative;
+  right: 2.5rem;
+}
+
+.button-icon {
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.button-icon:active {
+  transform: scale(1.1);
+}
+
+
+
+

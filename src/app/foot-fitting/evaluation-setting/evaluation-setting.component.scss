@@ -1,0 +1,82 @@
+@import '../../../styles/variables';
+
+.evaluation-setting-card {
+  width: 95vw;
+  height: 850px;
+  background-color: $white;
+  padding: 2rem 4rem;
+  box-shadow: 0.4rem 0.6rem 1.4rem rgba(0, 0, 0, 0.1);
+  border-radius: 1.5rem;
+}
+
+.evaluation-title {
+  color: $primary;
+  position: absolute;
+  margin-left: 40%;
+}
+
+span {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+p {
+  font-size: 12px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 0.55rem;
+  text-align: left;
+  font-size: 12px;
+}
+
+th {
+  background-color: #ffff;
+  font-size: 1rem;
+  letter-spacing: 0.005rem;
+}
+
+input {
+  border: 1px solid $dark;
+  border-radius: 5px;
+  width: 3.5rem;
+  font-size: 0.8rem;
+  text-align: center;
+  padding-top: 0.2rem;
+  background-color: $secondary;
+}
+
+#second-table {
+  td,
+  th {
+    padding: 0.20rem;
+    text-align: center;
+  }
+
+  th {
+    padding-bottom: 15px;
+  }
+}
+.custom-input {
+  border-radius: 5px;
+  width: 3.5rem;
+  font-size: 0.8rem;
+  padding-left: 0.4rem;
+  padding-top: 0.2rem;
+  background-color: $secondary;
+}
+.red-input {
+  border: 1px solid #FE4848;
+  color: #FE4848;
+}
+
+.green-input {
+  border: 1px solid #4AEAA6;
+  color: #4AEAA6;
+}
